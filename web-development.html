@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development | Web Development Team</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, "Khmer OS Battambang",
+                         "Noto Sans Khmer", sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.8;
+        }
+
+        /* Progress */
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 0%;
+            background: linear-gradient(90deg, #2563eb, #06b6d4, #22c55e);
+            z-index: 9999;
+        }
+
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, #0f172a, #1e40af, #2563eb);
+            color: white;
+            padding: 75px 20px 105px;
+        }
+
+        .hero-content {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.25);
+            padding: 7px 15px;
+            border-radius: 30px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #67e8f9;
+        }
+
+        .hero p {
+            max-width: 780px;
+            color: #dbeafe;
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .author {
+            color: #bfdbfe;
+            margin-bottom: 28px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        .btn-main {
+            background: white;
+            color: #1d4ed8;
+        }
+
+        .btn-back {
+            color: white;
+            background: rgba(255,255,255,.1);
+            border: 1px solid rgba(255,255,255,.3);
+        }
+
+        /* Stats */
+        .stats {
+            max-width: 1150px;
+            margin: -45px auto 40px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .stat {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 7px 25px rgba(0,0,0,.08);
+        }
+
+        .stat-icon {
+            font-size: 27px;
+        }
+
+        .stat-number {
+            color: #2563eb;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* Layout */
+        .layout {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 20px 60px;
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,.07);
+        }
+
+        .sidebar h3 {
+            margin-bottom: 15px;
+        }
+
+        .search {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dbe3ee;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .search:focus {
+            border-color: #2563eb;
+        }
+
+        .chapters {
+            list-style: none;
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        .chapters a {
+            display: block;
+            text-decoration: none;
+            color: #475569;
+            font-size: 13px;
+            padding: 7px 9px;
+            border-radius: 7px;
+        }
+
+        .chapters a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        /* Intro */
+        .intro,
+        .chapter {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 24px;
+            box-shadow: 0 5px 25px rgba(0,0,0,.06);
+        }
+
+        .intro h2 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .intro p {
+            color: #64748b;
+        }
+
+        /* Chapter */
+        .chapter {
+            scroll-margin-top: 20px;
+        }
+
+        .number {
+            display: inline-block;
+            color: #2563eb;
+            background: #eff6ff;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .chapter h2 {
+            color: #172554;
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .chapter p {
+            color: #475569;
+            margin-bottom: 14px;
+        }
+
+        .chapter ul {
+            padding-left: 25px;
+            color: #475569;
+        }
+
+        .chapter li {
+            margin-bottom: 5px;
+        }
+
+        /* Boxes */
+        .info {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 15px;
+            margin-top: 18px;
+            border-radius: 7px;
+        }
+
+        .tip {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 15px;
+            margin-top: 18px;
+            border-radius: 7px;
+        }
+
+        /* Code */
+        .code-title {
+            margin-top: 18px;
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 7px 14px;
+            border-radius: 8px 8px 0 0;
+            font-size: 12px;
+        }
+
+        pre {
+            background: #020617;
+            color: #e2e8f0;
+            padding: 18px;
+            overflow-x: auto;
+            border-radius: 0 0 8px 8px;
+            font-family: Consolas, monospace;
+        }
+
+        code {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        /* Conclusion */
+        .conclusion {
+            background: linear-gradient(135deg, #0f172a, #1e40af, #2563eb);
+            color: white;
+            padding: 35px;
+            border-radius: 16px;
+        }
+
+        .conclusion h2 {
+            margin-bottom: 12px;
+        }
+
+        .conclusion p {
+            color: #dbeafe;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back a {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+        }
+
+        /* Top */
+        #top {
+            display: none;
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        @media(max-width: 900px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media(max-width: 600px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .chapter,
+            .intro {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- HERO -->
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🌐 WEB DEVELOPMENT COURSE
+        </div>
+
+        <h1>
+            Web <span>Development</span>
+        </h1>
+
+        <p>
+            សិក្សាអំពី HTML, CSS, JavaScript និង
+            បច្ចេកវិទ្យាសំខាន់ៗសម្រាប់បង្កើត
+            Website និង Web Application។
+        </p>
+
+        <div class="author">
+            👨‍💻 Author: Web Development Team
+        </div>
+
+        <div class="buttons">
+
+            <a href="#chapter-1" class="btn btn-main">
+                🚀 Start Learning
+            </a>
+
+            <a href="books.html" class="btn btn-back">
+                ← Back to Books
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- STATS -->
+<div class="stats">
+
+    <div class="stat">
+        <div class="stat-icon">📚</div>
+        <div class="stat-number">20</div>
+        <div class="stat-label">Chapters</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">🌐</div>
+        <div class="stat-number">HTML</div>
+        <div class="stat-label">Structure</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">🎨</div>
+        <div class="stat-number">CSS</div>
+        <div class="stat-label">Design</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-number">JS</div>
+        <div class="stat-label">Interaction</div>
+    </div>
+
+</div>
+
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <h3>📑 Chapters</h3>
+
+        <input
+            type="text"
+            id="search"
+            class="search"
+            placeholder="🔍 Search chapter..."
+        >
+
+        <ul class="chapters">
+
+            <li><a href="#chapter-1">01. Introduction</a></li>
+            <li><a href="#chapter-2">02. How the Web Works</a></li>
+            <li><a href="#chapter-3">03. HTML Basics</a></li>
+            <li><a href="#chapter-4">04. HTML Elements</a></li>
+            <li><a href="#chapter-5">05. HTML Forms</a></li>
+            <li><a href="#chapter-6">06. CSS Basics</a></li>
+            <li><a href="#chapter-7">07. CSS Selectors</a></li>
+            <li><a href="#chapter-8">08. Colors & Fonts</a></li>
+            <li><a href="#chapter-9">09. CSS Box Model</a></li>
+            <li><a href="#chapter-10">10. Flexbox</a></li>
+            <li><a href="#chapter-11">11. CSS Grid</a></li>
+            <li><a href="#chapter-12">12. Responsive Design</a></li>
+            <li><a href="#chapter-13">13. JavaScript</a></li>
+            <li><a href="#chapter-14">14. JavaScript Variables</a></li>
+            <li><a href="#chapter-15">15. Functions</a></li>
+            <li><a href="#chapter-16">16. DOM</a></li>
+            <li><a href="#chapter-17">17. Events</a></li>
+            <li><a href="#chapter-18">18. APIs</a></li>
+            <li><a href="#chapter-19">19. Web Security</a></li>
+            <li><a href="#chapter-20">20. Web Project</a></li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- CONTENT -->
+    <main>
+
+        <!-- INTRO -->
+        <div class="intro">
+
+            <h2>🌐 ស្វាគមន៍មកកាន់ Web Development</h2>
+
+            <p>
+                Web Development គឺជាដំណើរការបង្កើត និងអភិវឌ្ឍ
+                Website និង Web Application។
+                វារួមមាន Frontend, Backend និង Database។
+            </p>
+
+            <div class="info">
+                💡 <strong>គោលបំណង៖</strong>
+                រៀនពីរបៀបបង្កើត Website ចាប់ពី HTML
+                រហូតដល់ JavaScript និង Web Application។
+            </div>
+
+        </div>
+
+
+        <!-- 1 -->
+        <section class="chapter" id="chapter-1">
+
+            <span class="number">CHAPTER 01</span>
+
+            <h2>សេចក្ដីផ្ដើមអំពី Web Development</h2>
+
+            <p>
+                Web Development គឺជាការបង្កើត Website
+                និង Web Application ដែលអាចដំណើរការ
+                តាមរយៈ Web Browser។
+            </p>
+
+            <ul>
+                <li>Frontend Development</li>
+                <li>Backend Development</li>
+                <li>Database</li>
+                <li>Web Hosting</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 2 -->
+        <section class="chapter" id="chapter-2">
+
+            <span class="number">CHAPTER 02</span>
+
+            <h2>របៀបដែល Web ដំណើរការ</h2>
+
+            <p>
+                នៅពេលអ្នកបើក Website Browser
+                នឹងផ្ញើ Request ទៅ Server។
+                Server នឹងផ្ញើ Response ត្រឡប់មក Browser។
+            </p>
+
+            <ul>
+                <li>Client</li>
+                <li>Server</li>
+                <li>HTTP / HTTPS</li>
+                <li>Request</li>
+                <li>Response</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 3 -->
+        <section class="chapter" id="chapter-3">
+
+            <span class="number">CHAPTER 03</span>
+
+            <h2>មូលដ្ឋាន HTML</h2>
+
+            <p>
+                HTML (HyperText Markup Language)
+                ប្រើសម្រាប់បង្កើត Structure របស់ Website។
+            </p>
+
+            <div class="code-title">HTML Example</div>
+
+<pre>
+&lt;h1&gt;Hello World&lt;/h1&gt;
+&lt;p&gt;Welcome to my website.&lt;/p&gt;
+</pre>
+
+        </section>
+
+
+        <!-- 4 -->
+        <section class="chapter" id="chapter-4">
+
+            <span class="number">CHAPTER 04</span>
+
+            <h2>HTML Elements</h2>
+
+            <p>
+                HTML មាន Elements ជាច្រើនសម្រាប់បង្ហាញ
+                Content ផ្សេងៗនៅលើ Website។
+            </p>
+
+            <ul>
+                <li>Heading</li>
+                <li>Paragraph</li>
+                <li>Image</li>
+                <li>Link</li>
+                <li>Button</li>
+                <li>List</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 5 -->
+        <section class="chapter" id="chapter-5">
+
+            <span class="number">CHAPTER 05</span>
+
+            <h2>HTML Forms</h2>
+
+            <p>
+                Form ប្រើសម្រាប់ទទួលទិន្នន័យពី User
+                ដូចជា Login, Register និង Contact Form។
+            </p>
+
+<pre>
+&lt;form&gt;
+    &lt;input type="text"&gt;
+    &lt;input type="email"&gt;
+    &lt;button&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</pre>
+
+        </section>
+
+
+        <!-- 6 -->
+        <section class="chapter" id="chapter-6">
+
+            <span class="number">CHAPTER 06</span>
+
+            <h2>មូលដ្ឋាន CSS</h2>
+
+            <p>
+                CSS (Cascading Style Sheets)
+                ប្រើសម្រាប់រចនា Website ដូចជា
+                ពណ៌ ទំហំ និង Layout។
+            </p>
+
+<pre>
+body {
+    background: #f4f7fb;
+}
+
+h1 {
+    color: blue;
+}
+</pre>
+
+        </section>
+
+
+        <!-- 7 -->
+        <section class="chapter" id="chapter-7">
+
+            <span class="number">CHAPTER 07</span>
+
+            <h2>CSS Selectors</h2>
+
+            <p>
+                Selector ប្រើសម្រាប់ជ្រើសរើស HTML Element
+                ដែលយើងចង់កែប្រែ Style។
+            </p>
+
+            <ul>
+                <li>Element Selector</li>
+                <li>Class Selector</li>
+                <li>ID Selector</li>
+                <li>Attribute Selector</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 8 -->
+        <section class="chapter" id="chapter-8">
+
+            <span class="number">CHAPTER 08</span>
+
+            <h2>Colors និង Fonts</h2>
+
+            <p>
+                CSS អាចកំណត់ពណ៌ និង Font
+                ដើម្បីធ្វើឱ្យ Website មានភាពស្រស់ស្អាត
+                និងងាយស្រួលអាន។
+            </p>
+
+<pre>
+body {
+    font-family: Arial;
+    color: #1e293b;
+}
+
+h1 {
+    color: #2563eb;
+}
+</pre>
+
+        </section>
+
+
+        <!-- 9 -->
+        <section class="chapter" id="chapter-9">
+
+            <span class="number">CHAPTER 09</span>
+
+            <h2>CSS Box Model</h2>
+
+            <p>
+                Box Model ជាគោលគំនិតសំខាន់ក្នុង CSS
+                ដែលរួមមាន Content, Padding, Border និង Margin។
+            </p>
+
+            <div class="info">
+                📦 Content → Padding → Border → Margin
+            </div>
+
+        </section>
+
+
+        <!-- 10 -->
+        <section class="chapter" id="chapter-10">
+
+            <span class="number">CHAPTER 10</span>
+
+            <h2>Flexbox</h2>
+
+            <p>
+                Flexbox ជា CSS Layout System
+                ដែលជួយរៀបចំ Elements នៅក្នុង Container
+                ឱ្យមានភាពងាយស្រួល។
+            </p>
+
+<pre>
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</pre>
+
+        </section>
+
+
+        <!-- 11 -->
+        <section class="chapter" id="chapter-11">
+
+            <span class="number">CHAPTER 11</span>
+
+            <h2>CSS Grid</h2>
+
+            <p>
+                CSS Grid ប្រើសម្រាប់បង្កើត Layout
+                ជាជួរ និងជួរឈរ។
+            </p>
+
+<pre>
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+</pre>
+
+        </section>
+
+
+        <!-- 12 -->
+        <section class="chapter" id="chapter-12">
+
+            <span class="number">CHAPTER 12</span>
+
+            <h2>Responsive Design</h2>
+
+            <p>
+                Responsive Design ធ្វើឱ្យ Website
+                អាចបង្ហាញបានល្អនៅលើ Computer,
+                Tablet និង Mobile។
+            </p>
+
+            <div class="info">
+                📱 Website គួរតែអាចសម្របខ្លួនទៅតាមទំហំ Screen។
+            </div>
+
+        </section>
+
+
+        <!-- 13 -->
+        <section class="chapter" id="chapter-13">
+
+            <span class="number">CHAPTER 13</span>
+
+            <h2>JavaScript</h2>
+
+            <p>
+                JavaScript គឺជា Programming Language
+                ដែលប្រើសម្រាប់បន្ថែម Interaction
+                និង Dynamic Behavior ទៅ Website។
+            </p>
+
+<pre>
+console.log("Hello World");
+</pre>
+
+        </section>
+
+
+        <!-- 14 -->
+        <section class="chapter" id="chapter-14">
+
+            <span class="number">CHAPTER 14</span>
+
+            <h2>JavaScript Variables</h2>
+
+            <p>
+                Variable ប្រើសម្រាប់រក្សាទុកទិន្នន័យ
+                ដែលកម្មវិធីត្រូវការប្រើប្រាស់។
+            </p>
+
+<pre>
+let name = "Dara";
+const age = 20;
+
+console.log(name);
+console.log(age);
+</pre>
+
+        </section>
+
+
+        <!-- 15 -->
+        <section class="chapter" id="chapter-15">
+
+            <span class="number">CHAPTER 15</span>
+
+            <h2>JavaScript Functions</h2>
+
+            <p>
+                Function គឺជាប្លុក Code
+                ដែលអាចហៅមកប្រើឡើងវិញ។
+            </p>
+
+<pre>
+function greet(name) {
+    return "Hello " + name;
+}
+
+console.log(greet("Dara"));
+</pre>
+
+        </section>
+
+
+        <!-- 16 -->
+        <section class="chapter" id="chapter-16">
+
+            <span class="number">CHAPTER 16</span>
+
+            <h2>DOM</h2>
+
+            <p>
+                DOM (Document Object Model)
+                អនុញ្ញាតឱ្យ JavaScript
+                ចូលប្រើ និងកែប្រែ HTML Elements។
+            </p>
+
+<pre>
+document.getElementById("title")
+    .textContent = "Hello!";
+</pre>
+
+        </section>
+
+
+        <!-- 17 -->
+        <section class="chapter" id="chapter-17">
+
+            <span class="number">CHAPTER 17</span>
+
+            <h2>JavaScript Events</h2>
+
+            <p>
+                Event គឺជាសកម្មភាពដែលកើតឡើង
+                ដូចជា Click, Submit, Mouse Move
+                និង Keyboard Input។
+            </p>
+
+<pre>
+button.addEventListener("click", function() {
+    alert("Button clicked!");
+});
+</pre>
+
+        </section>
+
+
+        <!-- 18 -->
+        <section class="chapter" id="chapter-18">
+
+            <span class="number">CHAPTER 18</span>
+
+            <h2>Web APIs</h2>
+
+            <p>
+                API អនុញ្ញាតឱ្យកម្មវិធីផ្សេងៗ
+                អាចទំនាក់ទំនង និងផ្លាស់ប្ដូរទិន្នន័យគ្នា។
+            </p>
+
+            <ul>
+                <li>REST API</li>
+                <li>JSON</li>
+                <li>HTTP Requests</li>
+                <li>Fetch API</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 19 -->
+        <section class="chapter" id="chapter-19">
+
+            <span class="number">CHAPTER 19</span>
+
+            <h2>Web Security</h2>
+
+            <p>
+                Web Security គឺជាការការពារ Website
+                និង User Data ពីការគំរាមកំហែង។
+            </p>
+
+            <ul>
+                <li>HTTPS</li>
+                <li>Strong Authentication</li>
+                <li>Input Validation</li>
+                <li>Secure Passwords</li>
+                <li>Software Updates</li>
+            </ul>
+
+            <div class="tip">
+                🛡️ ត្រូវរក្សាទុក Password និង
+                Personal Information ឱ្យមានសុវត្ថិភាព។
+            </div>
+
+        </section>
+
+
+        <!-- 20 -->
+        <section class="chapter" id="chapter-20">
+
+            <span class="number">CHAPTER 20</span>
+
+            <h2>Web Development Project</h2>
+
+            <p>
+                បន្ទាប់ពីរៀន HTML, CSS និង JavaScript
+                អ្នកអាចចាប់ផ្ដើមបង្កើត Project
+                ផ្ទាល់ខ្លួនបាន។
+            </p>
+
+            <ul>
+                <li>🌐 Personal Portfolio</li>
+                <li>🛒 Online Shop</li>
+                <li>📝 To-Do List</li>
+                <li>🎮 Browser Game</li>
+                <li>📚 Online Book Website</li>
+            </ul>
+
+            <div class="tip">
+                🚀 គម្រោងតូចៗជួយឱ្យអ្នកអនុវត្ត
+                HTML + CSS + JavaScript បានកាន់តែច្បាស់។
+            </div>
+
+        </section>
+
+
+        <!-- Conclusion -->
+        <div class="conclusion">
+
+            <h2>🎓 សេចក្ដីសន្និដ្ឋាន</h2>
+
+            <p>
+                Web Development គឺជាជំនាញដែលរួមបញ្ចូល
+                HTML សម្រាប់ Structure,
+                CSS សម្រាប់ Design និង
+                JavaScript សម្រាប់ Interaction។
+            </p>
+
+            <p style="margin-top:12px;">
+                🌐 ចាប់ផ្ដើមពី HTML → CSS → JavaScript
+                → APIs → Projects ហើយបន្តអភិវឌ្ឍ
+                ជំនាញរបស់អ្នក។
+            </p>
+
+        </div>
+
+
+        <div class="back">
+
+            <a href="books.html">
+                ← ត្រឡប់ទៅ Books
+            </a>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<button id="top">↑</button>
+
+
+<script>
+
+    // Reading progress
+    window.addEventListener("scroll", function () {
+
+        const scrollTop = window.scrollY;
+
+        const height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+
+        const percent =
+            (scrollTop / height) * 100;
+
+        document.getElementById("progress")
+            .style.width = percent + "%";
+    });
+
+
+    // Back to top
+    const topButton =
+        document.getElementById("top");
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 400) {
+            topButton.style.display = "block";
+        } else {
+            topButton.style.display = "none";
+        }
+
+    });
+
+    topButton.addEventListener("click", function () {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    // Search chapters
+    const search =
+        document.getElementById("search");
+
+    const chapter =
+        document.querySelectorAll(".chapter");
+
+    search.addEventListener("input", function () {
+
+        const value =
+            search.value.toLowerCase();
+
+        chapter.forEach(function (item) {
+
+            if (
+                item.textContent
+                .toLowerCase()
+                .includes(value)
+            ) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

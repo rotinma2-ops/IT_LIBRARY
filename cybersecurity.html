@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cybersecurity | Security Team</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, "Khmer OS Battambang",
+                         "Noto Sans Khmer", sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.8;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            z-index: 9999;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 5px;
+            background: linear-gradient(
+                90deg,
+                #2563eb,
+                #06b6d4,
+                #22c55e
+            );
+        }
+
+        /* Hero */
+        .hero {
+            color: white;
+            padding: 75px 20px 100px;
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(255,255,255,.15),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #172554,
+                    #1d4ed8
+                );
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "🔐";
+            position: absolute;
+            right: 8%;
+            top: 25px;
+            font-size: 170px;
+            opacity: .08;
+        }
+
+        .hero-content {
+            max-width: 1150px;
+            margin: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 50px;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.2);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #67e8f9;
+        }
+
+        .hero-description {
+            max-width: 780px;
+            color: #dbeafe;
+            font-size: 19px;
+            margin-bottom: 25px;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .author-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            color: #1d4ed8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .author span {
+            color: #bfdbfe;
+            font-size: 14px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 13px 23px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1d4ed8;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,.2);
+        }
+
+        .btn-outline {
+            color: white;
+            border: 1px solid rgba(255,255,255,.35);
+            background: rgba(255,255,255,.08);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,.18);
+        }
+
+        /* Statistics */
+        .stats {
+            max-width: 1150px;
+            margin: -45px auto 40px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(15,23,42,.1);
+        }
+
+        .stat-icon {
+            font-size: 27px;
+        }
+
+        .stat-number {
+            color: #2563eb;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* Main Layout */
+        .layout {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 20px 60px;
+
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 25px;
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(15,23,42,.08);
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .search {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        .search:focus {
+            border-color: #2563eb;
+        }
+
+        .chapter-list {
+            list-style: none;
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        .chapter-list li {
+            margin-bottom: 5px;
+        }
+
+        .chapter-list a {
+            display: block;
+            padding: 8px 10px;
+            color: #475569;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        .chapter-list a:hover {
+            background: #eff6ff;
+            color: #2563eb;
+            transform: translateX(3px);
+        }
+
+        /* Intro */
+        .intro {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 25px rgba(15,23,42,.07);
+        }
+
+        .intro h2 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .intro p {
+            color: #64748b;
+        }
+
+        /* Chapter */
+        .chapter {
+            background: white;
+            padding: 32px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            border: 1px solid #eef2f7;
+            box-shadow: 0 5px 25px rgba(15,23,42,.07);
+            scroll-margin-top: 25px;
+            transition: .3s;
+        }
+
+        .chapter:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 35px rgba(15,23,42,.11);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .chapter h2 {
+            color: #172554;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .chapter p {
+            color: #475569;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .chapter ul {
+            padding-left: 25px;
+            color: #475569;
+            margin-bottom: 15px;
+        }
+
+        .chapter li {
+            margin-bottom: 7px;
+        }
+
+        /* Information boxes */
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 16px 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        .warning-box {
+            background: #fff7ed;
+            border-left: 4px solid #f97316;
+            padding: 16px 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        .safe-box {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 16px 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        /* Code */
+        .code-title {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 8px 15px;
+            border-radius: 10px 10px 0 0;
+            font-size: 12px;
+        }
+
+        pre {
+            background: #020617;
+            color: #e2e8f0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 0 10px 10px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        code {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 2px 6px;
+            border-radius: 5px;
+        }
+
+        /* Conclusion */
+        .conclusion {
+            background: linear-gradient(
+                135deg,
+                #0f172a,
+                #1e3a8a,
+                #2563eb
+            );
+            color: white;
+            padding: 40px;
+            border-radius: 18px;
+            margin-top: 30px;
+        }
+
+        .conclusion h2 {
+            margin-bottom: 15px;
+        }
+
+        .conclusion p {
+            color: #dbeafe;
+        }
+
+        /* Back */
+        .back-section {
+            text-align: center;
+            padding: 25px 0 50px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 9px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .back-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Top */
+        .top-button {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(37,99,235,.35);
+            display: none;
+            z-index: 1000;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .chapter-list {
+                max-height: 250px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding: 60px 20px 80px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .layout {
+                padding: 0 12px 40px;
+            }
+
+            .chapter {
+                padding: 22px;
+            }
+
+            .chapter h2 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Reading Progress -->
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+
+<!-- HERO -->
+<header class="hero">
+
+    <div class="hero-content">
+
+        <span class="label">
+            🔐 CYBERSECURITY COURSE
+        </span>
+
+        <h1>
+            Cyber<span>security</span>
+        </h1>
+
+        <p class="hero-description">
+            សិក្សាអំពីមូលដ្ឋាន Cybersecurity,
+            Cyber Threats, Password Security,
+            Network Security, Web Security
+            និងវិធីការពារទិន្នន័យ។
+        </p>
+
+        <div class="author">
+
+            <div class="author-icon">
+                🔐
+            </div>
+
+            <div>
+                <strong>Security Team</strong>
+                <br>
+                <span>Cybersecurity Course</span>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <a href="#chapter-1" class="btn btn-primary">
+                🚀 Start Learning
+            </a>
+
+            <a href="books.html" class="btn btn-outline">
+                ← Back to Books
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- STATS -->
+<div class="stats">
+
+    <div class="stat">
+        <div class="stat-icon">🔐</div>
+        <div class="stat-number">20</div>
+        <div class="stat-label">Chapters</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">🛡️</div>
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Security Topics</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">💻</div>
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Examples</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-number">Beginner</div>
+        <div class="stat-label">Friendly</div>
+    </div>
+
+</div>
+
+
+<!-- MAIN -->
+<div class="layout">
+
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-title">
+            📑 Chapters
+        </div>
+
+        <input
+            type="text"
+            class="search"
+            id="chapterSearch"
+            placeholder="🔍 Search chapter..."
+        >
+
+        <ul class="chapter-list">
+
+            <li><a href="#chapter-1">01. Introduction</a></li>
+            <li><a href="#chapter-2">02. CIA Triad</a></li>
+            <li><a href="#chapter-3">03. Cyber Threats</a></li>
+            <li><a href="#chapter-4">04. Malware</a></li>
+            <li><a href="#chapter-5">05. Phishing</a></li>
+            <li><a href="#chapter-6">06. Password Security</a></li>
+            <li><a href="#chapter-7">07. Authentication</a></li>
+            <li><a href="#chapter-8">08. Network Security</a></li>
+            <li><a href="#chapter-9">09. Firewalls</a></li>
+            <li><a href="#chapter-10">10. Encryption</a></li>
+            <li><a href="#chapter-11">11. Web Security</a></li>
+            <li><a href="#chapter-12">12. Social Engineering</a></li>
+            <li><a href="#chapter-13">13. Data Security</a></li>
+            <li><a href="#chapter-14">14. Access Control</a></li>
+            <li><a href="#chapter-15">15. Wi-Fi Security</a></li>
+            <li><a href="#chapter-16">16. Mobile Security</a></li>
+            <li><a href="#chapter-17">17. Cloud Security</a></li>
+            <li><a href="#chapter-18">18. Incident Response</a></li>
+            <li><a href="#chapter-19">19. Backup & Recovery</a></li>
+            <li><a href="#chapter-20">20. Security Project</a></li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- CONTENT -->
+    <main>
+
+
+        <!-- INTRO -->
+        <div class="intro">
+
+            <h2>
+                🔐 ស្វាគមន៍មកកាន់ Cybersecurity
+            </h2>
+
+            <p>
+                Cybersecurity គឺជាការការពារ Computer,
+                Network, Applications និង Data
+                ពីការគំរាមកំហែង និងការចូលប្រើ
+                ដែលគ្មានការអនុញ្ញាត។
+            </p>
+
+            <div class="info-box">
+
+                💡 <strong>គោលបំណង៖</strong>
+                រៀនពីវិធីការពារគណនី ទិន្នន័យ
+                ឧបករណ៍ និងប្រព័ន្ធឱ្យមានសុវត្ថិភាព។
+
+            </div>
+
+        </div>
+
+
+        <!-- CHAPTER 1 -->
+        <section class="chapter" id="chapter-1">
+
+            <span class="chapter-number">CHAPTER 01</span>
+
+            <h2>សេចក្ដីផ្ដើមអំពី Cybersecurity</h2>
+
+            <p>
+                Cybersecurity គឺជាវិធីសាស្ត្រ និងបច្ចេកវិទ្យា
+                សម្រាប់ការពារប្រព័ន្ធកុំព្យូទ័រ
+                Network និងព័ត៌មាន។
+            </p>
+
+            <ul>
+                <li>ការពារ Computer</li>
+                <li>ការពារ Network</li>
+                <li>ការពារ Personal Data</li>
+                <li>ការពារ Online Accounts</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 2 -->
+        <section class="chapter" id="chapter-2">
+
+            <span class="chapter-number">CHAPTER 02</span>
+
+            <h2>CIA Triad</h2>
+
+            <p>
+                CIA Triad គឺជាគោលការណ៍សំខាន់
+                ៣ យ៉ាងក្នុង Cybersecurity។
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Confidentiality</strong>
+                    – រក្សាព័ត៌មានឱ្យមានភាពសម្ងាត់
+                </li>
+
+                <li>
+                    <strong>Integrity</strong>
+                    – រក្សាភាពត្រឹមត្រូវរបស់ទិន្នន័យ
+                </li>
+
+                <li>
+                    <strong>Availability</strong>
+                    – ធានាឱ្យប្រព័ន្ធអាចប្រើបាន
+                </li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 3 -->
+        <section class="chapter" id="chapter-3">
+
+            <span class="chapter-number">CHAPTER 03</span>
+
+            <h2>Cyber Threats</h2>
+
+            <p>
+                Cyber Threat គឺជាហានិភ័យ ឬការគំរាមកំហែង
+                ដែលអាចប៉ះពាល់ដល់ Computer Network
+                ឬ Data។
+            </p>
+
+            <ul>
+                <li>Malware</li>
+                <li>Phishing</li>
+                <li>Password Attacks</li>
+                <li>Social Engineering</li>
+                <li>Data Theft</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 4 -->
+        <section class="chapter" id="chapter-4">
+
+            <span class="chapter-number">CHAPTER 04</span>
+
+            <h2>Malware</h2>
+
+            <p>
+                Malware គឺជា Software ដែលត្រូវបានបង្កើត
+                ដើម្បីធ្វើសកម្មភាពដែលអាចបង្កគ្រោះថ្នាក់
+                ឬប៉ះពាល់ដល់ប្រព័ន្ធ។
+            </p>
+
+            <ul>
+                <li>Virus</li>
+                <li>Worm</li>
+                <li>Trojan</li>
+                <li>Ransomware</li>
+                <li>Spyware</li>
+            </ul>
+
+            <div class="safe-box">
+                🛡️ កុំដំឡើងកម្មវិធីពីប្រភពដែលមិនគួរឱ្យទុកចិត្ត
+                និងត្រូវ Update Software ជាប្រចាំ។
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 5 -->
+        <section class="chapter" id="chapter-5">
+
+            <span class="chapter-number">CHAPTER 05</span>
+
+            <h2>Phishing</h2>
+
+            <p>
+                Phishing គឺជាវិធីបោកបញ្ឆោតអ្នកប្រើប្រាស់
+                ដើម្បីឱ្យបង្ហាញព័ត៌មានសម្ងាត់
+                ដូចជា Password ឬព័ត៌មានគណនី។
+            </p>
+
+            <ul>
+                <li>Email Phishing</li>
+                <li>SMS Phishing</li>
+                <li>Fake Login Pages</li>
+                <li>Social Media Scams</li>
+            </ul>
+
+            <div class="warning-box">
+                ⚠️ កុំចុច Link ដែលមិនស្គាល់
+                ហើយត្រូវពិនិត្យ URL មុនពេល Login។
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 6 -->
+        <section class="chapter" id="chapter-6">
+
+            <span class="chapter-number">CHAPTER 06</span>
+
+            <h2>Password Security</h2>
+
+            <p>
+                Password គឺជាវិធីសំខាន់មួយសម្រាប់ការពារ Account។
+                Password គួរតែមានភាពរឹងមាំ និងមិនគួរប្រើ
+                Password ដូចគ្នាសម្រាប់គ្រប់ Account។
+            </p>
+
+            <ul>
+                <li>ប្រើ Password វែង</li>
+                <li>ប្រើអក្សរធំ និងអក្សរតូច</li>
+                <li>បញ្ចូលលេខ</li>
+                <li>ប្រើ Symbols</li>
+                <li>កុំប្រើព័ត៌មានផ្ទាល់ខ្លួន</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 7 -->
+        <section class="chapter" id="chapter-7">
+
+            <span class="chapter-number">CHAPTER 07</span>
+
+            <h2>Authentication</h2>
+
+            <p>
+                Authentication គឺជាដំណើរការផ្ទៀងផ្ទាត់ថា
+                អ្នកប្រើប្រាស់គឺជាមនុស្សដែលមានសិទ្ធិចូលប្រើ។
+            </p>
+
+            <ul>
+                <li>Password</li>
+                <li>PIN</li>
+                <li>Fingerprint</li>
+                <li>Face Recognition</li>
+                <li>Two-Factor Authentication (2FA)</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 8 -->
+        <section class="chapter" id="chapter-8">
+
+            <span class="chapter-number">CHAPTER 08</span>
+
+            <h2>Network Security</h2>
+
+            <p>
+                Network Security គឺជាការការពារ Network
+                ពីការចូលប្រើដោយគ្មានការអនុញ្ញាត
+                និងការគំរាមកំហែងផ្សេងៗ។
+            </p>
+
+            <ul>
+                <li>Secure Wi-Fi</li>
+                <li>Firewall</li>
+                <li>Encryption</li>
+                <li>Network Monitoring</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 9 -->
+        <section class="chapter" id="chapter-9">
+
+            <span class="chapter-number">CHAPTER 09</span>
+
+            <h2>Firewalls</h2>
+
+            <p>
+                Firewall គឺជាប្រព័ន្ធដែលជួយត្រួតពិនិត្យ
+                និងគ្រប់គ្រង Network Traffic
+                ចូល និងចេញពីប្រព័ន្ធ។
+            </p>
+
+            <div class="info-box">
+                🛡️ Firewall អាចជួយទប់ស្កាត់
+                Traffic ដែលមិនគួរឱ្យទុកចិត្ត
+                តាមរយៈច្បាប់ដែលបានកំណត់។
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 10 -->
+        <section class="chapter" id="chapter-10">
+
+            <span class="chapter-number">CHAPTER 10</span>
+
+            <h2>Encryption</h2>
+
+            <p>
+                Encryption គឺជាដំណើរការបម្លែងទិន្នន័យ
+                ទៅជាទម្រង់ដែលមិនអាចអានបានដោយងាយ
+                ដោយអ្នកដែលគ្មានសិទ្ធិ។
+            </p>
+
+            <ul>
+                <li>Encryption</li>
+                <li>Decryption</li>
+                <li>Encryption Key</li>
+                <li>HTTPS</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 11 -->
+        <section class="chapter" id="chapter-11">
+
+            <span class="chapter-number">CHAPTER 11</span>
+
+            <h2>Web Security</h2>
+
+            <p>
+                Web Security គឺជាការការពារ Website
+                និង Web Applications ពីការគំរាមកំហែង។
+            </p>
+
+            <ul>
+                <li>HTTPS</li>
+                <li>Secure Authentication</li>
+                <li>Input Validation</li>
+                <li>Secure Cookies</li>
+                <li>Software Updates</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 12 -->
+        <section class="chapter" id="chapter-12">
+
+            <span class="chapter-number">CHAPTER 12</span>
+
+            <h2>Social Engineering</h2>
+
+            <p>
+                Social Engineering គឺជាការប្រើបច្ចេកទេស
+                បញ្ចុះបញ្ចូល ឬបោកបញ្ឆោតមនុស្ស
+                ដើម្បីទទួលបានព័ត៌មាន ឬសិទ្ធិចូលប្រើ។
+            </p>
+
+            <ul>
+                <li>Phishing</li>
+                <li>Impersonation</li>
+                <li>Fake Support</li>
+                <li>Scam Messages</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 13 -->
+        <section class="chapter" id="chapter-13">
+
+            <span class="chapter-number">CHAPTER 13</span>
+
+            <h2>Data Security</h2>
+
+            <p>
+                Data Security គឺជាការការពារទិន្នន័យ
+                ពីការបាត់បង់ ការលួច និងការចូលប្រើ
+                ដោយគ្មានការអនុញ្ញាត។
+            </p>
+
+            <ul>
+                <li>Data Encryption</li>
+                <li>Access Control</li>
+                <li>Backup</li>
+                <li>Data Classification</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 14 -->
+        <section class="chapter" id="chapter-14">
+
+            <span class="chapter-number">CHAPTER 14</span>
+
+            <h2>Access Control</h2>
+
+            <p>
+                Access Control គឺជាការកំណត់ថា
+                អ្នកណាអាចចូលប្រើ Resource ណាមួយ
+                និងអាចធ្វើអ្វីបានខ្លះ។
+            </p>
+
+            <ul>
+                <li>User Accounts</li>
+                <li>Permissions</li>
+                <li>Roles</li>
+                <li>Least Privilege</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 15 -->
+        <section class="chapter" id="chapter-15">
+
+            <span class="chapter-number">CHAPTER 15</span>
+
+            <h2>Wi-Fi Security</h2>
+
+            <p>
+                Wi-Fi Security ជួយការពារ Wireless Network
+                ពីការចូលប្រើដោយគ្មានការអនុញ្ញាត។
+            </p>
+
+            <ul>
+                <li>ប្រើ Strong Wi-Fi Password</li>
+                <li>ប្រើ WPA2 ឬ WPA3 នៅពេលមានជម្រើស</li>
+                <li>Update Router Firmware</li>
+                <li>បិទការកំណត់ដែលមិនចាំបាច់</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 16 -->
+        <section class="chapter" id="chapter-16">
+
+            <span class="chapter-number">CHAPTER 16</span>
+
+            <h2>Mobile Security</h2>
+
+            <p>
+                Mobile Security គឺជាការការពារ Smartphone
+                និង Tablet ពីការគំរាមកំហែង។
+            </p>
+
+            <ul>
+                <li>Screen Lock</li>
+                <li>App Permissions</li>
+                <li>System Updates</li>
+                <li>Trusted App Stores</li>
+                <li>Device Backup</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 17 -->
+        <section class="chapter" id="chapter-17">
+
+            <span class="chapter-number">CHAPTER 17</span>
+
+            <h2>Cloud Security</h2>
+
+            <p>
+                Cloud Security គឺជាការការពារទិន្នន័យ
+                និង Services ដែលដំណើរការនៅលើ Cloud។
+            </p>
+
+            <ul>
+                <li>Account Security</li>
+                <li>Access Control</li>
+                <li>Encryption</li>
+                <li>Monitoring</li>
+                <li>Backup</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 18 -->
+        <section class="chapter" id="chapter-18">
+
+            <span class="chapter-number">CHAPTER 18</span>
+
+            <h2>Incident Response</h2>
+
+            <p>
+                Incident Response គឺជាដំណើរការឆ្លើយតប
+                នៅពេលមាន Security Incident។
+            </p>
+
+            <ul>
+                <li>Identify</li>
+                <li>Contain</li>
+                <li>Eradicate</li>
+                <li>Recover</li>
+                <li>Learn from the Incident</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 19 -->
+        <section class="chapter" id="chapter-19">
+
+            <span class="chapter-number">CHAPTER 19</span>
+
+            <h2>Backup & Recovery</h2>
+
+            <p>
+                Backup ជួយរក្សាច្បាប់ចម្លងទិន្នន័យ
+                ដើម្បីអាចស្ដារទិន្នន័យឡើងវិញ
+                នៅពេលមានបញ្ហា។
+            </p>
+
+            <ul>
+                <li>Cloud Backup</li>
+                <li>External Drive</li>
+                <li>Offline Backup</li>
+                <li>Recovery Plan</li>
+            </ul>
+
+            <div class="safe-box">
+                🛡️ គួរតែសាកល្បង Restore ពី Backup
+                ដើម្បីប្រាកដថា Backup អាចប្រើបាន។
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 20 -->
+        <section class="chapter" id="chapter-20">
+
+            <span class="chapter-number">CHAPTER 20</span>
+
+            <h2>Cybersecurity Project</h2>
+
+            <p>
+                បន្ទាប់ពីរៀនមូលដ្ឋាន Cybersecurity
+                អ្នកអាចអនុវត្តជាមួយ Project តូចៗ
+                ដើម្បីពង្រឹងចំណេះដឹង។
+            </p>
+
+            <ul>
+                <li>🔐 Password Security Checker</li>
+                <li>🛡️ Security Awareness Website</li>
+                <li>🌐 Network Security Diagram</li>
+                <li>📊 Security Risk Report</li>
+                <li>🔎 Phishing Awareness Project</li>
+            </ul>
+
+            <div class="warning-box">
+                ⚠️ សិក្សា Cybersecurity គួរតែអនុវត្ត
+                នៅលើប្រព័ន្ធ និងបរិស្ថានដែលអ្នកមាន
+                សិទ្ធិប្រើប្រាស់ប៉ុណ្ណោះ។
+            </div>
+
+        </section>
+
+
+        <!-- CONCLUSION -->
+        <div class="conclusion">
+
+            <h2>🎓 សេចក្ដីសន្និដ្ឋាន</h2>
+
+            <p>
+                Cybersecurity គឺជាជំនាញសំខាន់មួយ
+                សម្រាប់អ្នកប្រើប្រាស់ Computer,
+                Web Developer និង IT Professionals។
+            </p>
+
+            <p style="margin-top:15px;">
+                🔐 ចាប់ផ្ដើមពី Password និង Account Security
+                ហើយបន្តទៅ Network Security,
+                Web Security, Data Security និង
+                Incident Response។
+            </p>
+
+        </div>
+
+
+        <div class="back-section">
+
+            <a href="books.html" class="back-button">
+                ← ត្រឡប់ទៅ Books
+            </a>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- Back To Top -->
+<button class="top-button" id="topButton">
+    ↑
+</button>
+
+
+<script>
+
+    /* Reading Progress */
+
+    window.addEventListener("scroll", function () {
+
+        const scrollTop = window.scrollY;
+
+        const documentHeight =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+
+        const progress =
+            (scrollTop / documentHeight) * 100;
+
+        document.getElementById("progressBar")
+            .style.width = progress + "%";
+
+    });
+
+
+    /* Back To Top */
+
+    const topButton =
+        document.getElementById("topButton");
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 400) {
+            topButton.style.display = "block";
+        } else {
+            topButton.style.display = "none";
+        }
+
+    });
+
+    topButton.addEventListener("click", function () {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    /* Search Chapters */
+
+    const search =
+        document.getElementById("chapterSearch");
+
+    const chapters =
+        document.querySelectorAll(".chapter");
+
+    search.addEventListener("input", function () {
+
+        const value =
+            search.value.toLowerCase();
+
+        chapters.forEach(function (chapter) {
+
+            const text =
+                chapter.textContent.toLowerCase();
+
+            if (text.includes(value)) {
+                chapter.style.display = "block";
+            } else {
+                chapter.style.display = "none";
+            }
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

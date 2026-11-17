@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Computer Networking | IT Networking</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, "Khmer OS Battambang", "Noto Sans Khmer", sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           PROGRESS BAR
+        ========================= */
+
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            z-index: 9999;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 5px;
+            background: linear-gradient(
+                90deg,
+                #2563eb,
+                #06b6d4,
+                #7c3aed
+            );
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 90% 20%,
+                    rgba(255,255,255,0.18),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #164e63,
+                    #0284c7
+                );
+
+            color: white;
+            padding: 75px 20px 100px;
+        }
+
+        .hero::after {
+            content: "🌐";
+            position: absolute;
+            right: 8%;
+            top: 25px;
+            font-size: 150px;
+            opacity: 0.08;
+        }
+
+        .hero-content {
+            max-width: 1150px;
+            margin: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .book-label {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #67e8f9;
+        }
+
+        .hero-description {
+            max-width: 750px;
+            color: #dbeafe;
+            font-size: 19px;
+            margin-bottom: 28px;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .author-icon {
+            width: 45px;
+            height: 45px;
+            background: white;
+            color: #0284c7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .author-text strong {
+            display: block;
+        }
+
+        .author-text span {
+            color: #bae6fd;
+            font-size: 14px;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 23px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #0369a1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.18);
+        }
+
+        /* =========================
+           STATISTICS
+        ========================= */
+
+        .stats {
+            max-width: 1150px;
+            margin: -45px auto 40px;
+            position: relative;
+            z-index: 10;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+
+            padding: 0 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(15,23,42,0.1);
+        }
+
+        .stat-icon {
+            font-size: 25px;
+        }
+
+        .stat-number {
+            color: #0284c7;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* =========================
+           MAIN LAYOUT
+        ========================= */
+
+        .layout {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 20px 60px;
+
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 30px;
+
+            align-items: start;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: sticky;
+            top: 25px;
+
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+
+            box-shadow: 0 5px 25px rgba(15,23,42,0.08);
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 11px 13px;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        .search-box:focus {
+            border-color: #0284c7;
+        }
+
+        .chapter-list {
+            list-style: none;
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        .chapter-list li {
+            margin-bottom: 5px;
+        }
+
+        .chapter-list a {
+            display: block;
+            padding: 8px 10px;
+
+            color: #475569;
+            text-decoration: none;
+
+            border-radius: 7px;
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+        .chapter-list a:hover {
+            background: #ecfeff;
+            color: #0284c7;
+            transform: translateX(3px);
+        }
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .intro-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+
+            box-shadow: 0 5px 25px rgba(15,23,42,0.07);
+        }
+
+        .intro-card h2 {
+            color: #075985;
+            margin-bottom: 12px;
+        }
+
+        .intro-card p {
+            color: #64748b;
+        }
+
+        /* =========================
+           CHAPTER
+        ========================= */
+
+        .chapter {
+            background: white;
+            padding: 32px;
+            margin-bottom: 25px;
+
+            border-radius: 15px;
+            border: 1px solid #eef2f7;
+
+            box-shadow: 0 5px 25px rgba(15,23,42,0.07);
+
+            scroll-margin-top: 25px;
+
+            transition: 0.3s;
+        }
+
+        .chapter:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 35px rgba(15,23,42,0.11);
+        }
+
+        .chapter-number {
+            display: inline-block;
+
+            padding: 5px 12px;
+
+            background: #ecfeff;
+            color: #0284c7;
+
+            border-radius: 50px;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            margin-bottom: 12px;
+        }
+
+        .chapter h2 {
+            color: #082f49;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .chapter p {
+            color: #475569;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .chapter ul {
+            padding-left: 25px;
+            color: #475569;
+            margin-bottom: 15px;
+        }
+
+        .chapter li {
+            margin-bottom: 7px;
+        }
+
+        /* =========================
+           CODE / COMMAND BOX
+        ========================= */
+
+        .code-title {
+            display: flex;
+            justify-content: space-between;
+
+            background: #0f172a;
+            color: #94a3b8;
+
+            padding: 8px 15px;
+
+            border-radius: 10px 10px 0 0;
+
+            font-size: 12px;
+        }
+
+        pre {
+            background: #020617;
+            color: #e2e8f0;
+
+            padding: 20px;
+            margin: 0 0 20px;
+
+            border-radius: 0 0 10px 10px;
+
+            overflow-x: auto;
+
+            font-family: Consolas, Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        code {
+            background: #ecfeff;
+            color: #0369a1;
+
+            padding: 2px 6px;
+            border-radius: 5px;
+        }
+
+        /* =========================
+           INFO BOX
+        ========================= */
+
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #0284c7;
+
+            padding: 16px 18px;
+
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        .tip-box {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+
+            padding: 16px 18px;
+
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        /* =========================
+           NETWORK DIAGRAM
+        ========================= */
+
+        .network-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            background: #f8fafc;
+            padding: 25px;
+
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .network-device {
+            background: white;
+
+            border: 2px solid #38bdf8;
+
+            padding: 15px 20px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .network-device .icon {
+            font-size: 30px;
+        }
+
+        .arrow {
+            font-size: 25px;
+            color: #0284c7;
+        }
+
+        /* =========================
+           CONCLUSION
+        ========================= */
+
+        .conclusion {
+            background:
+                linear-gradient(
+                    135deg,
+                    #082f49,
+                    #0369a1
+                );
+
+            color: white;
+
+            padding: 40px;
+
+            border-radius: 18px;
+
+            margin-top: 30px;
+        }
+
+        .conclusion h2 {
+            margin-bottom: 15px;
+        }
+
+        .conclusion p {
+            color: #dbeafe;
+        }
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-section {
+            text-align: center;
+            padding: 20px 0 50px;
+        }
+
+        .back-button {
+            display: inline-block;
+
+            background: #0284c7;
+            color: white;
+
+            text-decoration: none;
+
+            padding: 13px 25px;
+
+            border-radius: 9px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background: #0369a1;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           TOP BUTTON
+        ========================= */
+
+        .top-button {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            width: 45px;
+            height: 45px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: #0284c7;
+            color: white;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            box-shadow: 0 5px 20px rgba(2,132,199,0.35);
+
+            display: none;
+
+            z-index: 1000;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .chapter-list {
+                max-height: 250px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding: 60px 20px 80px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+                padding: 0 10px;
+            }
+
+            .layout {
+                padding: 0 12px 40px;
+            }
+
+            .chapter {
+                padding: 22px;
+            }
+
+            .chapter h2 {
+                font-size: 21px;
+            }
+
+            .chapter p {
+                font-size: 15px;
+            }
+
+            .conclusion {
+                padding: 25px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     PROGRESS BAR
+========================= -->
+
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <span class="book-label">
+            🌐 NETWORKING COURSE
+        </span>
+
+        <h1>
+            Computer <span>Networking</span>
+        </h1>
+
+        <p class="hero-description">
+            រៀនអំពី Computer Networks, IP Addresses,
+            Routers, Switches, Protocols និងមូលដ្ឋានសំខាន់ៗ
+            នៃបច្ចេកវិទ្យាបណ្ដាញ។
+        </p>
+
+        <div class="author">
+
+            <div class="author-icon">
+                IT
+            </div>
+
+            <div class="author-text">
+                <strong>IT Networking</strong>
+                <span>Computer Networking Course</span>
+            </div>
+
+        </div>
+
+        <div class="hero-buttons">
+
+            <a href="#chapter-1" class="btn btn-primary">
+                🚀 Start Learning
+            </a>
+
+            <a href="books.html" class="btn btn-outline">
+                ← Back to Books
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<div class="stats">
+
+    <div class="stat-card">
+        <div class="stat-icon">🌐</div>
+        <div class="stat-number">20</div>
+        <div class="stat-label">Chapters</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">📡</div>
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Topics</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">💻</div>
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Examples</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-number">Beginner</div>
+        <div class="stat-label">Friendly</div>
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MAIN LAYOUT
+========================= -->
+
+<div class="layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-title">
+            📑 Chapters
+        </div>
+
+        <input
+            type="text"
+            class="search-box"
+            id="chapterSearch"
+            placeholder="🔍 Search chapter..."
+        >
+
+        <ul class="chapter-list">
+
+            <li>
+                <a href="#chapter-1">
+                    01. Introduction
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-2">
+                    02. Network Types
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-3">
+                    03. Network Topology
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-4">
+                    04. Network Devices
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-5">
+                    05. LAN, MAN, WAN
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-6">
+                    06. Internet
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-7">
+                    07. IP Address
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-8">
+                    08. IPv4
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-9">
+                    09. Subnetting
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-10">
+                    10. IPv6
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-11">
+                    11. Router
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-12">
+                    12. Switch
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-13">
+                    13. Wireless Network
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-14">
+                    14. Network Protocols
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-15">
+                    15. TCP/IP Model
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-16">
+                    16. DNS & DHCP
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-17">
+                    17. Network Security
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-18">
+                    18. Troubleshooting
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-19">
+                    19. Modern Networking
+                </a>
+            </li>
+
+            <li>
+                <a href="#chapter-20">
+                    20. Networking Projects
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- CONTENT -->
+
+    <main class="content">
+
+
+        <!-- INTRO -->
+
+        <div class="intro-card">
+
+            <h2>
+                🌐 ស្វាគមន៍មកកាន់ Computer Networking
+            </h2>
+
+            <p>
+                Computer Networking គឺជាចំណេះដឹងអំពីរបៀបដែល
+                Computer និងឧបករណ៍ផ្សេងៗភ្ជាប់ទំនាក់ទំនងគ្នា
+                ដើម្បីផ្លាស់ប្ដូរទិន្នន័យ និងប្រើប្រាស់ធនធានរួម។
+            </p>
+
+            <div class="info-box">
+                💡 <strong>ចំណាំ៖</strong>
+                មេរៀននេះរៀបចំពីមូលដ្ឋាន Network
+                រហូតដល់ប្រធានបទដែលប្រើប្រាស់ក្នុង Network
+                សម័យទំនើប។
+            </div>
+
+        </div>
+
+
+        <!-- CHAPTER 1 -->
+
+        <section class="chapter" id="chapter-1">
+
+            <span class="chapter-number">
+                CHAPTER 01
+            </span>
+
+            <h2>
+                សេចក្ដីផ្ដើមអំពី Computer Networking
+            </h2>
+
+            <p>
+                Computer Network គឺជាប្រព័ន្ធដែលអនុញ្ញាតឱ្យ
+                Computer និងឧបករណ៍ផ្សេងៗទំនាក់ទំនងគ្នា
+                និងផ្លាស់ប្ដូរទិន្នន័យតាមរយៈ Connection។
+            </p>
+
+            <p>
+                ឧទាហរណ៍៖ Computer នៅក្នុងការិយាល័យ
+                អាចភ្ជាប់គ្នា ដើម្បីចែករំលែក File,
+                Printer និង Internet។
+            </p>
+
+            <div class="network-diagram">
+
+                <div class="network-device">
+                    <div class="icon">💻</div>
+                    Computer
+                </div>
+
+                <div class="arrow">↔</div>
+
+                <div class="network-device">
+                    <div class="icon">🔀</div>
+                    Switch
+                </div>
+
+                <div class="arrow">↔</div>
+
+                <div class="network-device">
+                    <div class="icon">🌐</div>
+                    Internet
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 2 -->
+
+        <section class="chapter" id="chapter-2">
+
+            <span class="chapter-number">
+                CHAPTER 02
+            </span>
+
+            <h2>
+                ប្រភេទនៃ Network
+            </h2>
+
+            <p>
+                Network អាចបែងចែកជាប្រភេទផ្សេងៗ
+                ដោយផ្អែកលើទំហំ និងតំបន់ដែលវាគ្របដណ្ដប់។
+            </p>
+
+            <ul>
+                <li>
+                    <strong>PAN</strong> —
+                    Personal Area Network
+                </li>
+
+                <li>
+                    <strong>LAN</strong> —
+                    Local Area Network
+                </li>
+
+                <li>
+                    <strong>MAN</strong> —
+                    Metropolitan Area Network
+                </li>
+
+                <li>
+                    <strong>WAN</strong> —
+                    Wide Area Network
+                </li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 3 -->
+
+        <section class="chapter" id="chapter-3">
+
+            <span class="chapter-number">
+                CHAPTER 03
+            </span>
+
+            <h2>
+                Network Topology
+            </h2>
+
+            <p>
+                Network Topology គឺជារបៀបដែលឧបករណ៍
+                ត្រូវបានរៀបចំ និងភ្ជាប់គ្នានៅក្នុង Network។
+            </p>
+
+            <ul>
+                <li>⭐ Star Topology</li>
+                <li>🚌 Bus Topology</li>
+                <li>⭕ Ring Topology</li>
+                <li>🌳 Tree Topology</li>
+                <li>🕸️ Mesh Topology</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 4 -->
+
+        <section class="chapter" id="chapter-4">
+
+            <span class="chapter-number">
+                CHAPTER 04
+            </span>
+
+            <h2>
+                Network Devices
+            </h2>
+
+            <p>
+                Network Devices គឺជាឧបករណ៍ដែលប្រើសម្រាប់
+                បង្កើត និងគ្រប់គ្រង Network។
+            </p>
+
+            <ul>
+                <li>🔀 Switch</li>
+                <li>🚪 Router</li>
+                <li>📡 Access Point</li>
+                <li>🔌 Modem</li>
+                <li>🛡️ Firewall</li>
+                <li>🔁 Repeater</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 5 -->
+
+        <section class="chapter" id="chapter-5">
+
+            <span class="chapter-number">
+                CHAPTER 05
+            </span>
+
+            <h2>
+                LAN, MAN និង WAN
+            </h2>
+
+            <p>
+                LAN គ្របដណ្ដប់តំបន់តូច ដូចជា ផ្ទះ សាលារៀន
+                ឬការិយាល័យ។
+            </p>
+
+            <p>
+                MAN អាចគ្របដណ្ដប់តំបន់ធំជាង LAN
+                ដូចជាតំបន់ទីក្រុង។
+            </p>
+
+            <p>
+                WAN គ្របដណ្ដប់តំបន់ធំខ្លាំង
+                និងអាចភ្ជាប់ Network នៅទីតាំងផ្សេងៗគ្នា។
+            </p>
+
+        </section>
+
+
+        <!-- CHAPTER 6 -->
+
+        <section class="chapter" id="chapter-6">
+
+            <span class="chapter-number">
+                CHAPTER 06
+            </span>
+
+            <h2>
+                Internet និង Intranet
+            </h2>
+
+            <p>
+                Internet គឺជាបណ្ដាញធំដែលភ្ជាប់ Network
+                ជាច្រើននៅទូទាំងពិភពលោក។
+            </p>
+
+            <p>
+                Intranet គឺជា Network ផ្ទៃក្នុងដែលប្រើប្រាស់
+                នៅក្នុងអង្គការ ឬស្ថាប័ន។
+            </p>
+
+        </section>
+
+
+        <!-- CHAPTER 7 -->
+
+        <section class="chapter" id="chapter-7">
+
+            <span class="chapter-number">
+                CHAPTER 07
+            </span>
+
+            <h2>
+                IP Address
+            </h2>
+
+            <p>
+                IP Address គឺជាអាសយដ្ឋានដែលប្រើសម្រាប់
+                កំណត់អត្តសញ្ញាណឧបករណ៍នៅក្នុង Network។
+            </p>
+
+            <div class="code-title">
+                Example
+                <span>IPv4</span>
+            </div>
+
+            <pre>
+192.168.1.10
+            </pre>
+
+            <p>
+                IP Address ជួយឱ្យឧបករណ៍អាចស្វែងរក
+                និងទំនាក់ទំនងជាមួយឧបករណ៍ផ្សេងទៀត។
+            </p>
+
+        </section>
+
+
+        <!-- CHAPTER 8 -->
+
+        <section class="chapter" id="chapter-8">
+
+            <span class="chapter-number">
+                CHAPTER 08
+            </span>
+
+            <h2>
+                IPv4 Addressing
+            </h2>
+
+            <p>
+                IPv4 គឺជាប្រព័ន្ធ Addressing ដែលប្រើ
+                អាសយដ្ឋានទំហំ 32-bit។
+            </p>
+
+            <div class="code-title">
+                Example
+                <span>IPv4 Address</span>
+            </div>
+
+            <pre>
+192.168.1.1
+10.0.0.1
+172.16.0.1
+            </pre>
+
+        </section>
+
+
+        <!-- CHAPTER 9 -->
+
+        <section class="chapter" id="chapter-9">
+
+            <span class="chapter-number">
+                CHAPTER 09
+            </span>
+
+            <h2>
+                Subnetting
+            </h2>
+
+            <p>
+                Subnetting គឺជាវិធីបែងចែក Network ធំមួយ
+                ទៅជា Network តូចៗជាច្រើន។
+            </p>
+
+            <div class="code-title">
+                Example
+                <span>Subnet Mask</span>
+            </div>
+
+            <pre>
+255.255.255.0
+
+CIDR:
+/24
+            </pre>
+
+            <div class="tip-box">
+                💡 Subnetting អាចជួយរៀបចំ Network
+                និងគ្រប់គ្រង IP Address ឱ្យមានប្រសិទ្ធភាព។
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 10 -->
+
+        <section class="chapter" id="chapter-10">
+
+            <span class="chapter-number">
+                CHAPTER 10
+            </span>
+
+            <h2>
+                IPv6
+            </h2>
+
+            <p>
+                IPv6 ត្រូវបានបង្កើតឡើងដើម្បីផ្ដល់ IP Address
+                ច្រើនជាង IPv4។
+            </p>
+
+            <div class="code-title">
+                Example
+                <span>IPv6 Address</span>
+            </div>
+
+            <pre>
+2001:db8::1
+            </pre>
+
+        </section>
+
+
+        <!-- CHAPTER 11 -->
+
+        <section class="chapter" id="chapter-11">
+
+            <span class="chapter-number">
+                CHAPTER 11
+            </span>
+
+            <h2>
+                Router
+            </h2>
+
+            <p>
+                Router គឺជាឧបករណ៍ដែលប្រើសម្រាប់ភ្ជាប់
+                Network ផ្សេងៗ និងជួយបញ្ជូន Packet
+                ទៅកាន់ Destination។
+            </p>
+
+            <div class="network-diagram">
+
+                <div class="network-device">
+                    💻<br>
+                    Network A
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="network-device">
+                    🚪<br>
+                    Router
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="network-device">
+                    🌐<br>
+                    Network B
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 12 -->
+
+        <section class="chapter" id="chapter-12">
+
+            <span class="chapter-number">
+                CHAPTER 12
+            </span>
+
+            <h2>
+                Network Switch
+            </h2>
+
+            <p>
+                Switch ត្រូវបានប្រើដើម្បីភ្ជាប់ឧបករណ៍ជាច្រើន
+                នៅក្នុង Local Area Network។
+            </p>
+
+            <div class="network-diagram">
+
+                <div class="network-device">
+                    💻<br>
+                    PC 1
+                </div>
+
+                <div class="network-device">
+                    🔀<br>
+                    Switch
+                </div>
+
+                <div class="network-device">
+                    💻<br>
+                    PC 2
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 13 -->
+
+        <section class="chapter" id="chapter-13">
+
+            <span class="chapter-number">
+                CHAPTER 13
+            </span>
+
+            <h2>
+                Wireless Network
+            </h2>
+
+            <p>
+                Wireless Network អនុញ្ញាតឱ្យឧបករណ៍ភ្ជាប់
+                Network ដោយមិនចាំបាច់ប្រើខ្សែ។
+            </p>
+
+            <ul>
+                <li>Wi-Fi</li>
+                <li>Wireless Access Point</li>
+                <li>Wireless Router</li>
+                <li>Bluetooth</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 14 -->
+
+        <section class="chapter" id="chapter-14">
+
+            <span class="chapter-number">
+                CHAPTER 14
+            </span>
+
+            <h2>
+                Network Protocols
+            </h2>
+
+            <p>
+                Protocol គឺជាច្បាប់ដែលកំណត់របៀបដែលឧបករណ៍
+                ទំនាក់ទំនង និងផ្លាស់ប្ដូរទិន្នន័យគ្នា។
+            </p>
+
+            <ul>
+                <li>HTTP / HTTPS</li>
+                <li>FTP</li>
+                <li>SMTP</li>
+                <li>DNS</li>
+                <li>DHCP</li>
+                <li>TCP</li>
+                <li>UDP</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 15 -->
+
+        <section class="chapter" id="chapter-15">
+
+            <span class="chapter-number">
+                CHAPTER 15
+            </span>
+
+            <h2>
+                TCP/IP Model
+            </h2>
+
+            <p>
+                TCP/IP Model គឺជាគំរូសំខាន់មួយសម្រាប់
+                ពន្យល់ពីរបៀបដែលទិន្នន័យធ្វើដំណើរឆ្លងកាត់ Network។
+            </p>
+
+            <ul>
+                <li>Application Layer</li>
+                <li>Transport Layer</li>
+                <li>Internet Layer</li>
+                <li>Network Access Layer</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 16 -->
+
+        <section class="chapter" id="chapter-16">
+
+            <span class="chapter-number">
+                CHAPTER 16
+            </span>
+
+            <h2>
+                DNS និង DHCP
+            </h2>
+
+            <p>
+                DNS មានតួនាទីបម្លែង Domain Name ទៅជា IP Address។
+            </p>
+
+            <div class="code-title">
+                Example
+                <span>DNS</span>
+            </div>
+
+            <pre>
+google.com
+        ↓
+IP Address
+            </pre>
+
+            <p>
+                DHCP ប្រើសម្រាប់ផ្ដល់ IP Address
+                និង Network Configuration ដោយស្វ័យប្រវត្តិ។
+            </p>
+
+        </section>
+
+
+        <!-- CHAPTER 17 -->
+
+        <section class="chapter" id="chapter-17">
+
+            <span class="chapter-number">
+                CHAPTER 17
+            </span>
+
+            <h2>
+                Network Security
+            </h2>
+
+            <p>
+                Network Security គឺជាការការពារ Network
+                និងទិន្នន័យពីការចូលប្រើដោយគ្មានការអនុញ្ញាត
+                និងការគំរាមកំហែងផ្សេងៗ។
+            </p>
+
+            <ul>
+                <li>Firewall</li>
+                <li>Password Security</li>
+                <li>Encryption</li>
+                <li>Authentication</li>
+                <li>VPN</li>
+            </ul>
+
+            <div class="tip-box">
+                🔒 ត្រូវប្រើ Password ដែលរឹងមាំ
+                និងធ្វើបច្ចុប្បន្នភាព Software
+                ដើម្បីជួយការពារ Network។
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 18 -->
+
+        <section class="chapter" id="chapter-18">
+
+            <span class="chapter-number">
+                CHAPTER 18
+            </span>
+
+            <h2>
+                Network Troubleshooting
+            </h2>
+
+            <p>
+                Troubleshooting គឺជាដំណើរការស្វែងរក
+                និងដោះស្រាយបញ្ហាដែលកើតឡើងនៅក្នុង Network។
+            </p>
+
+            <div class="code-title">
+                Command
+                <span>Windows</span>
+            </div>
+
+            <pre>
+ipconfig
+
+ping 8.8.8.8
+
+tracert google.com
+            </pre>
+
+            <p>
+                Commands ទាំងនេះអាចជួយពិនិត្យ Network
+                Configuration និង Connection។
+            </p>
+
+        </section>
+
+
+        <!-- CHAPTER 19 -->
+
+        <section class="chapter" id="chapter-19">
+
+            <span class="chapter-number">
+                CHAPTER 19
+            </span>
+
+            <h2>
+                Modern Networking
+            </h2>
+
+            <p>
+                បច្ចេកវិទ្យា Network សម័យទំនើបមានការអភិវឌ្ឍ
+                និងប្រើប្រាស់បច្ចេកវិទ្យាជាច្រើន។
+            </p>
+
+            <ul>
+                <li>☁️ Cloud Networking</li>
+                <li>🔐 VPN</li>
+                <li>📡 5G Networking</li>
+                <li>🏢 SD-WAN</li>
+                <li>🤖 Network Automation</li>
+                <li>🔒 Zero Trust Security</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 20 -->
+
+        <section class="chapter" id="chapter-20">
+
+            <span class="chapter-number">
+                CHAPTER 20
+            </span>
+
+            <h2>
+                Networking Projects & Practice
+            </h2>
+
+            <p>
+                បន្ទាប់ពីរៀនមូលដ្ឋាន Networking
+                អ្នកអាចអនុវត្តតាមរយៈ Project តូចៗ។
+            </p>
+
+            <ul>
+                <li>🌐 បង្កើត LAN Network</li>
+                <li>🔀 Configure Switch</li>
+                <li>🚪 Configure Router</li>
+                <li>📡 បង្កើត Wi-Fi Network</li>
+                <li>📍 រៀបចំ IP Address</li>
+                <li>🧮 អនុវត្ត Subnetting</li>
+                <li>🛡️ រៀបចំ Firewall</li>
+                <li>🔧 Network Troubleshooting</li>
+            </ul>
+
+            <div class="tip-box">
+                🚀 <strong>អនុវត្ត៖</strong>
+                ការអនុវត្ត Network ជាក់ស្ដែង
+                ជួយឱ្យអ្នកយល់ពីរបៀបដែលឧបករណ៍
+                និង Protocols ធ្វើការជាមួយគ្នា។
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CONCLUSION
+        ========================= -->
+
+        <div class="conclusion">
+
+            <h2>
+                🎓 សេចក្ដីសន្និដ្ឋាន
+            </h2>
+
+            <p>
+                Computer Networking គឺជាមូលដ្ឋានសំខាន់
+                សម្រាប់អ្នកដែលចង់សិក្សាផ្នែក IT,
+                Network Administration, System Administration,
+                Cybersecurity និង Cloud Computing។
+            </p>
+
+            <p style="margin-top:15px;">
+                🌐 ចាប់ផ្ដើមពី Network មូលដ្ឋាន
+                ហើយបន្តអនុវត្តជាមួយឧបករណ៍ និង Project
+                ដើម្បីបង្កើនជំនាញរបស់អ្នក។
+            </p>
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <div class="back-section">
+
+            <a href="books.html" class="back-button">
+                ← ត្រឡប់ទៅ Books
+            </a>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- BACK TO TOP -->
+
+<button class="top-button" id="topButton">
+    ↑
+</button>
+
+
+<script>
+
+    /* =========================
+       READING PROGRESS
+    ========================= */
+
+    window.addEventListener("scroll", function () {
+
+        const scrollTop = window.scrollY;
+
+        const documentHeight =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+
+        const progress =
+            (scrollTop / documentHeight) * 100;
+
+        document.getElementById("progressBar").style.width =
+            progress + "%";
+
+    });
+
+
+    /* =========================
+       BACK TO TOP
+    ========================= */
+
+    const topButton =
+        document.getElementById("topButton");
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 400) {
+            topButton.style.display = "block";
+        } else {
+            topButton.style.display = "none";
+        }
+
+    });
+
+    topButton.addEventListener("click", function () {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    /* =========================
+       SEARCH CHAPTERS
+    ========================= */
+
+    const search =
+        document.getElementById("chapterSearch");
+
+    const chapters =
+        document.querySelectorAll(".chapter");
+
+    search.addEventListener("input", function () {
+
+        const value =
+            search.value.toLowerCase();
+
+        chapters.forEach(function (chapter) {
+
+            const text =
+                chapter.textContent.toLowerCase();
+
+            if (text.includes(value)) {
+                chapter.style.display = "block";
+            } else {
+                chapter.style.display = "none";
+            }
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Python Programming | IT Programming</title>
+
+    <style>
+
+        /* =========================
+           GLOBAL
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, "Khmer OS Battambang", "Noto Sans Khmer", sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           READING PROGRESS
+        ========================= */
+
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            z-index: 9999;
+        }
+
+        .progress-bar {
+            height: 5px;
+            width: 0%;
+            background: linear-gradient(
+                90deg,
+                #2563eb,
+                #7c3aed,
+                #06b6d4
+            );
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent 30%),
+                linear-gradient(135deg, #111827, #1e3a8a, #2563eb);
+            color: white;
+            padding: 80px 20px 100px;
+        }
+
+        .hero::before {
+            content: "</>";
+            position: absolute;
+            right: 8%;
+            top: 40px;
+            font-size: 150px;
+            font-weight: bold;
+            color: rgba(255,255,255,0.05);
+        }
+
+        .hero-content {
+            max-width: 1150px;
+            margin: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .book-label {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 7px 15px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #93c5fd;
+        }
+
+        .hero-description {
+            max-width: 720px;
+            font-size: 19px;
+            color: #dbeafe;
+            margin-bottom: 30px;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .author-icon {
+            width: 45px;
+            height: 45px;
+            background: white;
+            color: #2563eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .author-text strong {
+            display: block;
+        }
+
+        .author-text span {
+            color: #bfdbfe;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           HERO BUTTONS
+        ========================= */
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 23px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1d4ed8;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            max-width: 1150px;
+            margin: -45px auto 40px;
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 0 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 22px;
+            box-shadow: 0 8px 30px rgba(15,23,42,0.1);
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .stat-number {
+            font-size: 25px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+
+        /* =========================
+           MAIN LAYOUT
+        ========================= */
+
+        .layout {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 20px 60px;
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: sticky;
+            top: 25px;
+            background: white;
+            border-radius: 15px;
+            padding: 22px;
+            box-shadow: 0 5px 25px rgba(15,23,42,0.08);
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            outline: none;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .search-box:focus {
+            border-color: #2563eb;
+        }
+
+        .chapter-list {
+            list-style: none;
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        .chapter-list li {
+            margin-bottom: 5px;
+        }
+
+        .chapter-list a {
+            display: block;
+            padding: 8px 10px;
+            border-radius: 7px;
+            color: #475569;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .chapter-list a:hover {
+            background: #eff6ff;
+            color: #2563eb;
+            transform: translateX(3px);
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+            min-width: 0;
+        }
+
+        .intro-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 25px rgba(15,23,42,0.07);
+        }
+
+        .intro-card h2 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .intro-card p {
+            color: #64748b;
+        }
+
+
+        /* =========================
+           CHAPTER
+        ========================= */
+
+        .chapter {
+            background: white;
+            padding: 32px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(15,23,42,0.07);
+            border: 1px solid #eef2f7;
+            scroll-margin-top: 25px;
+            transition: 0.3s;
+        }
+
+        .chapter:hover {
+            box-shadow: 0 10px 35px rgba(15,23,42,0.10);
+            transform: translateY(-2px);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .chapter h2 {
+            font-size: 26px;
+            color: #172554;
+            margin-bottom: 15px;
+        }
+
+        .chapter p {
+            color: #475569;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .chapter ul {
+            padding-left: 25px;
+            color: #475569;
+            margin-bottom: 15px;
+        }
+
+        .chapter li {
+            margin-bottom: 6px;
+        }
+
+
+        /* =========================
+           CODE
+        ========================= */
+
+        .code-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 8px 15px;
+            border-radius: 10px 10px 0 0;
+            font-size: 12px;
+        }
+
+        pre {
+            background: #020617;
+            color: #e2e8f0;
+            padding: 20px;
+            margin: 0 0 20px;
+            border-radius: 0 0 10px 10px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        code {
+            font-family: Consolas, Monaco, monospace;
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 2px 6px;
+            border-radius: 5px;
+        }
+
+
+        /* =========================
+           INFO BOX
+        ========================= */
+
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 16px 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        .tip-box {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 16px 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+
+        /* =========================
+           CONCLUSION
+        ========================= */
+
+        .conclusion {
+            background:
+                linear-gradient(135deg, #172554, #1e40af);
+            color: white;
+            padding: 40px;
+            border-radius: 18px;
+            margin-top: 30px;
+        }
+
+        .conclusion h2 {
+            margin-bottom: 15px;
+        }
+
+        .conclusion p {
+            color: #dbeafe;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-section {
+            text-align: center;
+            padding: 20px 0 50px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 9px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           BACK TO TOP
+        ========================= */
+
+        .top-button {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(37,99,235,0.35);
+            display: none;
+            z-index: 1000;
+        }
+
+        .top-button:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .chapter-list {
+                max-height: 250px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding: 60px 20px 80px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+                padding: 0 10px;
+            }
+
+            .layout {
+                padding: 0 12px 40px;
+            }
+
+            .chapter {
+                padding: 22px;
+            }
+
+            .chapter h2 {
+                font-size: 21px;
+            }
+
+            .chapter p {
+                font-size: 15px;
+            }
+
+            .conclusion {
+                padding: 25px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     READING PROGRESS
+========================= -->
+
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <span class="book-label">
+            📘 PROGRAMMING COURSE
+        </span>
+
+        <h1>
+            Python <span>Programming</span>
+        </h1>
+
+        <p class="hero-description">
+            សៀវភៅសិក្សា Python Programming ចាប់ពីមូលដ្ឋាន
+            រហូតដល់ការបង្កើត Project ពិតប្រាកដ។
+            សាកសមសម្រាប់អ្នកចាប់ផ្ដើម និងអ្នកចង់បង្កើនជំនាញ Programming។
+        </p>
+
+
+        <div class="author">
+
+            <div class="author-icon">
+                IT
+            </div>
+
+            <div class="author-text">
+                <strong>IT Programming</strong>
+                <span>Python Programming Course</span>
+            </div>
+
+        </div>
+
+
+        <div class="hero-buttons">
+
+            <a href="#chapter-1" class="btn btn-primary">
+                🚀 Start Learning
+            </a>
+
+            <a href="books.html" class="btn btn-outline">
+                ← Back to Books
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<div class="stats">
+
+    <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-number">20</div>
+        <div class="stat-label">Chapters</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">💻</div>
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Code Examples</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-number">Beginner</div>
+        <div class="stat-label">Friendly</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">🚀</div>
+        <div class="stat-number">Projects</div>
+        <div class="stat-label">Practice</div>
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="layout">
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-title">
+            📑 Chapters
+        </div>
+
+        <input
+            type="text"
+            class="search-box"
+            id="chapterSearch"
+            placeholder="🔍 Search chapter..."
+        >
+
+        <ul class="chapter-list" id="chapterList">
+
+            <li><a href="#chapter-1">01. សេចក្ដីផ្ដើម Python</a></li>
+            <li><a href="#chapter-2">02. ការដំឡើង Python</a></li>
+            <li><a href="#chapter-3">03. Variables</a></li>
+            <li><a href="#chapter-4">04. Data Types</a></li>
+            <li><a href="#chapter-5">05. Operators</a></li>
+            <li><a href="#chapter-6">06. Input & Output</a></li>
+            <li><a href="#chapter-7">07. If / Elif / Else</a></li>
+            <li><a href="#chapter-8">08. For Loop</a></li>
+            <li><a href="#chapter-9">09. While Loop</a></li>
+            <li><a href="#chapter-10">10. Lists</a></li>
+            <li><a href="#chapter-11">11. Tuples</a></li>
+            <li><a href="#chapter-12">12. Dictionaries</a></li>
+            <li><a href="#chapter-13">13. Functions</a></li>
+            <li><a href="#chapter-14">14. Modules</a></li>
+            <li><a href="#chapter-15">15. File Handling</a></li>
+            <li><a href="#chapter-16">16. Error Handling</a></li>
+            <li><a href="#chapter-17">17. OOP</a></li>
+            <li><a href="#chapter-18">18. Database</a></li>
+            <li><a href="#chapter-19">19. Web Development</a></li>
+            <li><a href="#chapter-20">20. Python Projects</a></li>
+
+        </ul>
+
+    </aside>
+
+
+
+    <!-- =========================
+         CONTENT
+    ========================= -->
+
+    <main class="content">
+
+
+        <!-- INTRO -->
+
+        <div class="intro-card">
+
+            <h2>🐍 ស្វាគមន៍មកកាន់ Python Programming</h2>
+
+            <p>
+                សៀវភៅនេះត្រូវបានរៀបចំឡើងសម្រាប់អ្នកដែលចង់រៀន
+                Python Programming ចាប់ពីកម្រិតមូលដ្ឋាន។
+                មេរៀនត្រូវបានរៀបចំជាជំហានៗ ដើម្បីឱ្យអ្នកអាច
+                រៀន និងអនុវត្ត Code បានយ៉ាងងាយស្រួល។
+            </p>
+
+            <div class="info-box">
+                💡 <strong>គន្លឹះ៖</strong>
+                កុំគ្រាន់តែអាន Code។ សូមសាកល្បងសរសេរ
+                និង Run Code ដោយខ្លួនឯង ដើម្បីឱ្យយល់បានកាន់តែច្បាស់។
+            </div>
+
+        </div>
+
+
+
+        <!-- CHAPTER 1 -->
+
+        <section class="chapter" id="chapter-1">
+
+            <span class="chapter-number">CHAPTER 01</span>
+
+            <h2>សេចក្ដីផ្ដើមអំពី Python</h2>
+
+            <p>
+                Python គឺជាភាសាកម្មវិធីមួយដែលមាន Syntax
+                ងាយស្រួលអាន និងសរសេរ។ Python ត្រូវបានប្រើ
+                ក្នុង Web Development, Data Science,
+                Artificial Intelligence, Automation និង Software Development។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Example</span>
+            </div>
+
+            <pre>
+print("សួស្តី Python!")
+            </pre>
+
+            <div class="tip-box">
+                ✅ <strong>ចំណាំ៖</strong>
+                <code>print()</code> ប្រើសម្រាប់បង្ហាញព័ត៌មាន
+                នៅលើអេក្រង់។
+            </div>
+
+        </section>
+
+
+
+        <!-- CHAPTER 2 -->
+
+        <section class="chapter" id="chapter-2">
+
+            <span class="chapter-number">CHAPTER 02</span>
+
+            <h2>ការដំឡើង Python និងកម្មវិធីដំបូង</h2>
+
+            <p>
+                ដើម្បីចាប់ផ្ដើមរៀន Python អ្នកត្រូវដំឡើង Python
+                និងអាចប្រើ Visual Studio Code សម្រាប់សរសេរ Code។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Hello World</span>
+            </div>
+
+            <pre>
+print("Hello World")
+            </pre>
+
+            <p>
+                Code ខាងលើនឹងបង្ហាញ <strong>Hello World</strong>
+                នៅលើអេក្រង់។
+            </p>
+
+        </section>
+
+
+
+        <!-- CHAPTER 3 -->
+
+        <section class="chapter" id="chapter-3">
+
+            <span class="chapter-number">CHAPTER 03</span>
+
+            <h2>Variables — អថេរ</h2>
+
+            <p>
+                Variable គឺជាកន្លែងសម្រាប់រក្សាទុកទិន្នន័យ។
+                យើងអាចប្រើ Variable ដើម្បីរក្សាទុកឈ្មោះ អាយុ
+                លេខ និងព័ត៌មានផ្សេងៗ។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Variables</span>
+            </div>
+
+            <pre>
+name = "Dara"
+age = 20
+
+print(name)
+print(age)
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 4 -->
+
+        <section class="chapter" id="chapter-4">
+
+            <span class="chapter-number">CHAPTER 04</span>
+
+            <h2>Data Types — ប្រភេទទិន្នន័យ</h2>
+
+            <p>
+                Python មានប្រភេទទិន្នន័យជាច្រើនសម្រាប់
+                រក្សាទុកព័ត៌មានផ្សេងៗ។
+            </p>
+
+            <ul>
+                <li>String — អក្សរ</li>
+                <li>Integer — ចំនួនគត់</li>
+                <li>Float — ចំនួនទសភាគ</li>
+                <li>Boolean — True / False</li>
+                <li>List — បញ្ជី</li>
+                <li>Tuple — បញ្ជីមិនអាចកែប្រែ</li>
+                <li>Dictionary — Key / Value</li>
+            </ul>
+
+            <div class="code-title">
+                Python
+                <span>Data Types</span>
+            </div>
+
+            <pre>
+name = "Dara"
+age = 20
+height = 1.75
+student = True
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 5 -->
+
+        <section class="chapter" id="chapter-5">
+
+            <span class="chapter-number">CHAPTER 05</span>
+
+            <h2>Operators — ប្រមាណវិធី</h2>
+
+            <p>
+                Operators ប្រើសម្រាប់ធ្វើប្រតិបត្តិការលើទិន្នន័យ។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Operators</span>
+            </div>
+
+            <pre>
+a = 10
+b = 3
+
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a % b)
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 6 -->
+
+        <section class="chapter" id="chapter-6">
+
+            <span class="chapter-number">CHAPTER 06</span>
+
+            <h2>Input និង Output</h2>
+
+            <p>
+                <code>input()</code> ប្រើសម្រាប់ទទួលព័ត៌មាន
+                ពីអ្នកប្រើប្រាស់។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>User Input</span>
+            </div>
+
+            <pre>
+name = input("បញ្ចូលឈ្មោះរបស់អ្នក: ")
+
+print("សួស្តី", name)
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 7 -->
+
+        <section class="chapter" id="chapter-7">
+
+            <span class="chapter-number">CHAPTER 07</span>
+
+            <h2>If, Elif និង Else</h2>
+
+            <p>
+                Conditional Statements ប្រើសម្រាប់ឱ្យកម្មវិធី
+                ធ្វើការសម្រេចចិត្តតាមលក្ខខណ្ឌ។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Conditions</span>
+            </div>
+
+            <pre>
+age = 18
+
+if age >= 18:
+    print("អ្នកជាមនុស្សពេញវ័យ")
+else:
+    print("អ្នកមិនទាន់ពេញវ័យ")
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 8 -->
+
+        <section class="chapter" id="chapter-8">
+
+            <span class="chapter-number">CHAPTER 08</span>
+
+            <h2>For Loop</h2>
+
+            <p>
+                For Loop ប្រើសម្រាប់ដំណើរការ Code ដដែលៗ
+                ជាច្រើនដង។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>For Loop</span>
+            </div>
+
+            <pre>
+for i in range(5):
+    print(i)
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 9 -->
+
+        <section class="chapter" id="chapter-9">
+
+            <span class="chapter-number">CHAPTER 09</span>
+
+            <h2>While Loop</h2>
+
+            <p>
+                While Loop ដំណើរការដរាបណាលក្ខខណ្ឌ
+                នៅតែមានតម្លៃ True។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>While Loop</span>
+            </div>
+
+            <pre>
+number = 1
+
+while number <= 5:
+    print(number)
+    number += 1
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 10 -->
+
+        <section class="chapter" id="chapter-10">
+
+            <span class="chapter-number">CHAPTER 10</span>
+
+            <h2>Lists — បញ្ជី</h2>
+
+            <p>
+                List អាចរក្សាទុកទិន្នន័យជាច្រើននៅក្នុង Variable មួយ។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Lists</span>
+            </div>
+
+            <pre>
+students = ["Dara", "Sokha", "Mony"]
+
+print(students[0])
+
+students.append("Kimsan")
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 11 -->
+
+        <section class="chapter" id="chapter-11">
+
+            <span class="chapter-number">CHAPTER 11</span>
+
+            <h2>Tuples</h2>
+
+            <p>
+                Tuple មានលក្ខណៈស្រដៀង List ប៉ុន្តែទិន្នន័យ
+                នៅក្នុង Tuple មិនអាចកែប្រែបាន។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Tuple</span>
+            </div>
+
+            <pre>
+colors = ("Red", "Green", "Blue")
+
+print(colors[0])
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 12 -->
+
+        <section class="chapter" id="chapter-12">
+
+            <span class="chapter-number">CHAPTER 12</span>
+
+            <h2>Dictionaries</h2>
+
+            <p>
+                Dictionary រក្សាទុកទិន្នន័យជាគូ
+                Key និង Value។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Dictionary</span>
+            </div>
+
+            <pre>
+student = {
+    "name": "Dara",
+    "age": 20,
+    "major": "IT"
+}
+
+print(student["name"])
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 13 -->
+
+        <section class="chapter" id="chapter-13">
+
+            <span class="chapter-number">CHAPTER 13</span>
+
+            <h2>Functions — អនុគមន៍</h2>
+
+            <p>
+                Function គឺជាក្រុម Code ដែលអាចហៅប្រើឡើងវិញបាន។
+                វាជួយរៀបចំកម្មវិធីឱ្យមានរបៀបរៀបរយ។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Function</span>
+            </div>
+
+            <pre>
+def greeting(name):
+    print("សួស្តី", name)
+
+greeting("Dara")
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 14 -->
+
+        <section class="chapter" id="chapter-14">
+
+            <span class="chapter-number">CHAPTER 14</span>
+
+            <h2>Modules</h2>
+
+            <p>
+                Module គឺជា Python File ដែលអាចយក Code
+                ទៅប្រើក្នុងកម្មវិធីផ្សេងទៀត។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Modules</span>
+            </div>
+
+            <pre>
+import math
+
+print(math.sqrt(25))
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 15 -->
+
+        <section class="chapter" id="chapter-15">
+
+            <span class="chapter-number">CHAPTER 15</span>
+
+            <h2>File Handling</h2>
+
+            <p>
+                Python អាចអាន និងសរសេរ File បាន។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>File Handling</span>
+            </div>
+
+            <pre>
+file = open("data.txt", "r")
+
+content = file.read()
+
+print(content)
+
+file.close()
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 16 -->
+
+        <section class="chapter" id="chapter-16">
+
+            <span class="chapter-number">CHAPTER 16</span>
+
+            <h2>Error Handling</h2>
+
+            <p>
+                Python ប្រើ Try និង Except ដើម្បីគ្រប់គ្រង Error
+                ដែលអាចកើតឡើងនៅពេលកម្មវិធីដំណើរការ។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>Error Handling</span>
+            </div>
+
+            <pre>
+try:
+    number = int(input("បញ្ចូលលេខ: "))
+    print(number)
+
+except:
+    print("សូមបញ្ចូលលេខត្រឹមត្រូវ")
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 17 -->
+
+        <section class="chapter" id="chapter-17">
+
+            <span class="chapter-number">CHAPTER 17</span>
+
+            <h2>Object-Oriented Programming</h2>
+
+            <p>
+                Python គាំទ្រ Object-Oriented Programming (OOP)។
+                យើងអាចបង្កើត Class និង Object ដើម្បីរៀបចំកម្មវិធី។
+            </p>
+
+            <div class="code-title">
+                Python
+                <span>OOP</span>
+            </div>
+
+            <pre>
+class Student:
+
+    def __init__(self, name):
+        self.name = name
+
+student = Student("Dara")
+
+print(student.name)
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 18 -->
+
+        <section class="chapter" id="chapter-18">
+
+            <span class="chapter-number">CHAPTER 18</span>
+
+            <h2>Python និង Database</h2>
+
+            <p>
+                Python អាចភ្ជាប់ជាមួយ Database ដើម្បីរក្សាទុក
+                និងគ្រប់គ្រងទិន្នន័យ។
+            </p>
+
+            <ul>
+                <li>ព័ត៌មានអ្នកប្រើប្រាស់</li>
+                <li>ព័ត៌មានសិស្ស</li>
+                <li>Products</li>
+                <li>Orders</li>
+                <li>Posts</li>
+            </ul>
+
+            <div class="info-box">
+                💡 Django អាចប្រើ Python ដើម្បីធ្វើការជាមួយ
+                Database បានយ៉ាងងាយស្រួល។
+            </div>
+
+        </section>
+
+
+
+        <!-- CHAPTER 19 -->
+
+        <section class="chapter" id="chapter-19">
+
+            <span class="chapter-number">CHAPTER 19</span>
+
+            <h2>Python សម្រាប់ Web Development</h2>
+
+            <p>
+                Python អាចប្រើសម្រាប់បង្កើត Website និង
+                Web Application។
+            </p>
+
+            <ul>
+                <li>Django</li>
+                <li>Flask</li>
+                <li>FastAPI</li>
+            </ul>
+
+            <div class="code-title">
+                Web Development
+                <span>Technology Stack</span>
+            </div>
+
+            <pre>
+Python      → Backend
+HTML        → Structure
+CSS         → Design
+JavaScript  → Interaction
+Database    → Data Storage
+            </pre>
+
+        </section>
+
+
+
+        <!-- CHAPTER 20 -->
+
+        <section class="chapter" id="chapter-20">
+
+            <span class="chapter-number">CHAPTER 20</span>
+
+            <h2>បង្កើត Project ដោយ Python</h2>
+
+            <p>
+                បន្ទាប់ពីរៀន Python មូលដ្ឋានរួច
+                អ្នកអាចចាប់ផ្ដើមបង្កើត Project ពិតប្រាកដ។
+            </p>
+
+            <ul>
+                <li>🧮 Calculator</li>
+                <li>🎮 Number Guessing Game</li>
+                <li>📝 To-Do List</li>
+                <li>🎓 Student Management System</li>
+                <li>📚 Library Management System</li>
+                <li>🔐 Login System</li>
+                <li>📰 Blog Website</li>
+                <li>📖 Online Book Website</li>
+                <li>🛒 E-commerce Website</li>
+                <li>🌐 Django Web Application</li>
+            </ul>
+
+            <div class="tip-box">
+                🚀 <strong>អនុវត្ត៖</strong>
+                កុំឈប់ត្រឹមការអាន។ ចាប់ផ្ដើមបង្កើត Project
+                តូចៗ ដើម្បីពង្រឹងជំនាញ Python របស់អ្នក។
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             CONCLUSION
+        ========================= -->
+
+        <div class="conclusion">
+
+            <h2>🎓 សេចក្ដីសន្និដ្ឋាន</h2>
+
+            <p>
+                Python គឺជាភាសាកម្មវិធីដ៏មានប្រយោជន៍
+                និងសាកសមសម្រាប់អ្នកចាប់ផ្ដើម។
+                តាមរយៈមេរៀនទាំង ២០ ជំពូកនេះ អ្នកបានសិក្សា
+                ចាប់ពី Variables, Data Types, Conditions,
+                Loops, Functions, OOP, Database រហូតដល់
+                Web Development និង Project។
+            </p>
+
+            <p style="margin-top: 15px;">
+                ⭐ គោលដៅបន្ទាប់គឺយកចំណេះដឹងទាំងនេះទៅ
+                បង្កើត Project ផ្ទាល់ខ្លួន។
+            </p>
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <div class="back-section">
+
+            <a href="books.html" class="back-button">
+                ← ត្រឡប់ទៅ Books
+            </a>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<!-- BACK TO TOP -->
+
+<button class="top-button" id="topButton">
+    ↑
+</button>
+
+
+
+<script>
+
+    /* =========================
+       READING PROGRESS
+    ========================= */
+
+    window.addEventListener("scroll", function () {
+
+        const scrollTop = window.scrollY;
+
+        const documentHeight =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+
+        const progress =
+            (scrollTop / documentHeight) * 100;
+
+        document.getElementById("progressBar").style.width =
+            progress + "%";
+
+    });
+
+
+    /* =========================
+       BACK TO TOP
+    ========================= */
+
+    const topButton =
+        document.getElementById("topButton");
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 400) {
+            topButton.style.display = "block";
+        } else {
+            topButton.style.display = "none";
+        }
+
+    });
+
+    topButton.addEventListener("click", function () {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    /* =========================
+       CHAPTER SEARCH
+    ========================= */
+
+    const search =
+        document.getElementById("chapterSearch");
+
+    const chapters =
+        document.querySelectorAll(".chapter");
+
+    search.addEventListener("input", function () {
+
+        const value =
+            search.value.toLowerCase();
+
+        chapters.forEach(function (chapter) {
+
+            const text =
+                chapter.textContent.toLowerCase();
+
+            if (text.includes(value)) {
+                chapter.style.display = "block";
+            } else {
+                chapter.style.display = "none";
+            }
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+</html>

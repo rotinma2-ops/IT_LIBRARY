@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Database Systems | Database Team</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, "Khmer OS Battambang", "Noto Sans Khmer", sans-serif;
+            background: #f5f7fb;
+            color: #1e293b;
+            line-height: 1.8;
+        }
+
+        /* Progress */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            z-index: 9999;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 5px;
+            background: linear-gradient(90deg, #7c3aed, #a855f7, #ec4899);
+        }
+
+        /* Hero */
+        .hero {
+            background:
+                radial-gradient(circle at 85% 20%,
+                rgba(255,255,255,.15),
+                transparent 30%),
+                linear-gradient(135deg, #1e1b4b, #4c1d95, #7e22ce);
+
+            color: white;
+            padding: 75px 20px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "🗄️";
+            position: absolute;
+            right: 8%;
+            top: 20px;
+            font-size: 160px;
+            opacity: .08;
+        }
+
+        .hero-content {
+            max-width: 1150px;
+            margin: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 50px;
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.25);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #d8b4fe;
+        }
+
+        .hero-description {
+            max-width: 760px;
+            color: #ede9fe;
+            font-size: 19px;
+            margin-bottom: 25px;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .author-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            color: #7e22ce;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .author span {
+            color: #ddd6fe;
+            font-size: 14px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 13px 23px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #6d28d9;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,.2);
+        }
+
+        .btn-outline {
+            color: white;
+            border: 1px solid rgba(255,255,255,.4);
+            background: rgba(255,255,255,.08);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,.18);
+        }
+
+        /* Stats */
+        .stats {
+            max-width: 1150px;
+            margin: -45px auto 40px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(15,23,42,.1);
+        }
+
+        .stat-icon {
+            font-size: 27px;
+        }
+
+        .stat-number {
+            color: #7e22ce;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* Layout */
+        .layout {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 20px 60px;
+
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 25px;
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(15,23,42,.08);
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .search {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        .search:focus {
+            border-color: #9333ea;
+        }
+
+        .chapter-list {
+            list-style: none;
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        .chapter-list li {
+            margin-bottom: 5px;
+        }
+
+        .chapter-list a {
+            display: block;
+            padding: 8px 10px;
+            color: #475569;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        .chapter-list a:hover {
+            background: #faf5ff;
+            color: #7e22ce;
+            transform: translateX(3px);
+        }
+
+        /* Intro */
+        .intro {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 25px rgba(15,23,42,.07);
+        }
+
+        .intro h2 {
+            color: #581c87;
+            margin-bottom: 12px;
+        }
+
+        .intro p {
+            color: #64748b;
+        }
+
+        /* Chapters */
+        .chapter {
+            background: white;
+            padding: 32px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            border: 1px solid #eef2f7;
+            box-shadow: 0 5px 25px rgba(15,23,42,.07);
+            scroll-margin-top: 25px;
+            transition: .3s;
+        }
+
+        .chapter:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 35px rgba(15,23,42,.11);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #faf5ff;
+            color: #7e22ce;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .chapter h2 {
+            color: #3b0764;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .chapter p {
+            color: #475569;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .chapter ul {
+            padding-left: 25px;
+            color: #475569;
+            margin-bottom: 15px;
+        }
+
+        .chapter li {
+            margin-bottom: 7px;
+        }
+
+        /* Code */
+        .code-title {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 8px 15px;
+            border-radius: 10px 10px 0 0;
+            font-size: 12px;
+        }
+
+        pre {
+            background: #020617;
+            color: #e2e8f0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 0 10px 10px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        code {
+            background: #faf5ff;
+            color: #7e22ce;
+            padding: 2px 6px;
+            border-radius: 5px;
+        }
+
+        /* Info */
+        .info-box {
+            background: #f5f3ff;
+            border-left: 4px solid #8b5cf6;
+            padding: 16px 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        .tip-box {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 16px 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        th {
+            background: #f5f3ff;
+            color: #581c87;
+        }
+
+        /* Conclusion */
+        .conclusion {
+            background: linear-gradient(
+                135deg,
+                #3b0764,
+                #7e22ce
+            );
+
+            color: white;
+            padding: 40px;
+            border-radius: 18px;
+            margin-top: 30px;
+        }
+
+        .conclusion h2 {
+            margin-bottom: 15px;
+        }
+
+        .conclusion p {
+            color: #ede9fe;
+        }
+
+        .back-section {
+            text-align: center;
+            padding: 25px 0 50px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #7e22ce;
+            color: white;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 9px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .back-button:hover {
+            background: #6b21a8;
+            transform: translateY(-2px);
+        }
+
+        /* Top */
+        .top-button {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: #7e22ce;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(126,34,206,.35);
+            display: none;
+            z-index: 1000;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .chapter-list {
+                max-height: 250px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding: 60px 20px 80px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .layout {
+                padding: 0 12px 40px;
+            }
+
+            .chapter {
+                padding: 22px;
+            }
+
+            .chapter h2 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Progress -->
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+
+<!-- HERO -->
+<header class="hero">
+
+    <div class="hero-content">
+
+        <span class="label">
+            🗄️ DATABASE COURSE
+        </span>
+
+        <h1>
+            Database <span>Systems</span>
+        </h1>
+
+        <p class="hero-description">
+            រៀនអំពី Database, SQL, Tables, Relationships,
+            Keys និង Database Management ចាប់ពីមូលដ្ឋាន
+            រហូតដល់ការអនុវត្ត។
+        </p>
+
+        <div class="author">
+
+            <div class="author-icon">
+                DB
+            </div>
+
+            <div>
+                <strong>Database Team</strong>
+                <br>
+                <span>Database Systems Course</span>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <a href="#chapter-1" class="btn btn-primary">
+                🚀 Start Learning
+            </a>
+
+            <a href="books.html" class="btn btn-outline">
+                ← Back to Books
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- STATS -->
+<div class="stats">
+
+    <div class="stat">
+        <div class="stat-icon">🗄️</div>
+        <div class="stat-number">20</div>
+        <div class="stat-label">Chapters</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">💾</div>
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Topics</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">⌨️</div>
+        <div class="stat-number">15+</div>
+        <div class="stat-label">SQL Examples</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-number">Beginner</div>
+        <div class="stat-label">Friendly</div>
+    </div>
+
+</div>
+
+
+<!-- MAIN -->
+<div class="layout">
+
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-title">
+            📑 Chapters
+        </div>
+
+        <input
+            type="text"
+            class="search"
+            id="chapterSearch"
+            placeholder="🔍 Search chapter..."
+        >
+
+        <ul class="chapter-list">
+
+            <li><a href="#chapter-1">01. Introduction</a></li>
+            <li><a href="#chapter-2">02. Database Concepts</a></li>
+            <li><a href="#chapter-3">03. DBMS</a></li>
+            <li><a href="#chapter-4">04. Database Models</a></li>
+            <li><a href="#chapter-5">05. Tables</a></li>
+            <li><a href="#chapter-6">06. Primary Key</a></li>
+            <li><a href="#chapter-7">07. Foreign Key</a></li>
+            <li><a href="#chapter-8">08. Relationships</a></li>
+            <li><a href="#chapter-9">09. SQL</a></li>
+            <li><a href="#chapter-10">10. SELECT</a></li>
+            <li><a href="#chapter-11">11. INSERT</a></li>
+            <li><a href="#chapter-12">12. UPDATE</a></li>
+            <li><a href="#chapter-13">13. DELETE</a></li>
+            <li><a href="#chapter-14">14. JOIN</a></li>
+            <li><a href="#chapter-15">15. Normalization</a></li>
+            <li><a href="#chapter-16">16. ER Diagram</a></li>
+            <li><a href="#chapter-17">17. Transactions</a></li>
+            <li><a href="#chapter-18">18. Database Security</a></li>
+            <li><a href="#chapter-19">19. Backup & Recovery</a></li>
+            <li><a href="#chapter-20">20. Database Project</a></li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- CONTENT -->
+    <main>
+
+
+        <!-- INTRO -->
+        <div class="intro">
+
+            <h2>
+                🗄️ ស្វាគមន៍មកកាន់ Database Systems
+            </h2>
+
+            <p>
+                Database គឺជាប្រព័ន្ធសម្រាប់រក្សាទុក
+                រៀបចំ គ្រប់គ្រង និងស្វែងរកទិន្នន័យ
+                ដោយមានប្រសិទ្ធភាព។
+            </p>
+
+            <div class="info-box">
+
+                💡 <strong>គោលបំណង៖</strong>
+                សិក្សាពី Database, DBMS, SQL,
+                Tables, Keys, Relationships និង
+                Database Management។
+
+            </div>
+
+        </div>
+
+
+        <!-- 1 -->
+        <section class="chapter" id="chapter-1">
+
+            <span class="chapter-number">CHAPTER 01</span>
+
+            <h2>សេចក្ដីផ្ដើមអំពី Database</h2>
+
+            <p>
+                Database គឺជាបណ្តុំទិន្នន័យដែលត្រូវបានរៀបចំ
+                ដើម្បីឱ្យងាយស្រួលក្នុងការរក្សាទុក
+                ស្វែងរក និងគ្រប់គ្រង។
+            </p>
+
+            <ul>
+                <li>រក្សាទុកព័ត៌មាន</li>
+                <li>ស្វែងរកទិន្នន័យ</li>
+                <li>កែប្រែទិន្នន័យ</li>
+                <li>លុបទិន្នន័យ</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 2 -->
+        <section class="chapter" id="chapter-2">
+
+            <span class="chapter-number">CHAPTER 02</span>
+
+            <h2>Database Concepts</h2>
+
+            <p>
+                Database មានធាតុសំខាន់ៗជាច្រើន
+                ដែលធ្វើការជាមួយគ្នាដើម្បីគ្រប់គ្រងទិន្នន័យ។
+            </p>
+
+            <ul>
+                <li>Database</li>
+                <li>Table</li>
+                <li>Record</li>
+                <li>Field</li>
+                <li>Relationship</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 3 -->
+        <section class="chapter" id="chapter-3">
+
+            <span class="chapter-number">CHAPTER 03</span>
+
+            <h2>DBMS</h2>
+
+            <p>
+                DBMS (Database Management System)
+                គឺជា Software ដែលប្រើសម្រាប់បង្កើត
+                និងគ្រប់គ្រង Database។
+            </p>
+
+            <ul>
+                <li>MySQL</li>
+                <li>PostgreSQL</li>
+                <li>Oracle Database</li>
+                <li>Microsoft SQL Server</li>
+                <li>SQLite</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 4 -->
+        <section class="chapter" id="chapter-4">
+
+            <span class="chapter-number">CHAPTER 04</span>
+
+            <h2>Database Models</h2>
+
+            <p>
+                Database Model គឺជាវិធីសម្រាប់រៀបចំ
+                និងបង្ហាញទំនាក់ទំនងរបស់ទិន្នន័យ។
+            </p>
+
+            <ul>
+                <li>Relational Database</li>
+                <li>Hierarchical Database</li>
+                <li>Network Database</li>
+                <li>NoSQL Database</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 5 -->
+        <section class="chapter" id="chapter-5">
+
+            <span class="chapter-number">CHAPTER 05</span>
+
+            <h2>Tables</h2>
+
+            <p>
+                Table គឺជាកន្លែងសម្រាប់រក្សាទុកទិន្នន័យ
+                ក្នុង Relational Database។
+            </p>
+
+            <div class="code-title">
+                SQL Example
+            </div>
+
+            <pre>CREATE TABLE students (
+    id INT,
+    name VARCHAR(100),
+    age INT
+);</pre>
+
+        </section>
+
+
+        <!-- 6 -->
+        <section class="chapter" id="chapter-6">
+
+            <span class="chapter-number">CHAPTER 06</span>
+
+            <h2>Primary Key</h2>
+
+            <p>
+                Primary Key គឺជា Column ដែលប្រើសម្រាប់
+                កំណត់អត្តសញ្ញាណ Record នីមួយៗឱ្យមានភាពខុសគ្នា។
+            </p>
+
+            <div class="code-title">
+                SQL Example
+            </div>
+
+            <pre>CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(100)
+);</pre>
+
+        </section>
+
+
+        <!-- 7 -->
+        <section class="chapter" id="chapter-7">
+
+            <span class="chapter-number">CHAPTER 07</span>
+
+            <h2>Foreign Key</h2>
+
+            <p>
+                Foreign Key ប្រើសម្រាប់បង្កើតទំនាក់ទំនង
+                រវាង Table ពីរ ឬច្រើន។
+            </p>
+
+            <div class="code-title">
+                SQL Example
+            </div>
+
+            <pre>CREATE TABLE orders (
+    id INT PRIMARY KEY,
+    student_id INT,
+    FOREIGN KEY (student_id)
+    REFERENCES students(id)
+);</pre>
+
+        </section>
+
+
+        <!-- 8 -->
+        <section class="chapter" id="chapter-8">
+
+            <span class="chapter-number">CHAPTER 08</span>
+
+            <h2>Relationships</h2>
+
+            <p>
+                Relationship គឺជាទំនាក់ទំនងរវាង Table។
+            </p>
+
+            <ul>
+                <li>One-to-One</li>
+                <li>One-to-Many</li>
+                <li>Many-to-Many</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 9 -->
+        <section class="chapter" id="chapter-9">
+
+            <span class="chapter-number">CHAPTER 09</span>
+
+            <h2>SQL</h2>
+
+            <p>
+                SQL (Structured Query Language)
+                គឺជាភាសាសម្រាប់ធ្វើការជាមួយ Relational Database។
+            </p>
+
+            <div class="code-title">
+                SQL Example
+            </div>
+
+            <pre>CREATE DATABASE school;</pre>
+
+        </section>
+
+
+        <!-- 10 -->
+        <section class="chapter" id="chapter-10">
+
+            <span class="chapter-number">CHAPTER 10</span>
+
+            <h2>SELECT Statement</h2>
+
+            <p>
+                SELECT ប្រើសម្រាប់ទាញយកទិន្នន័យ
+                ពី Database។
+            </p>
+
+            <div class="code-title">
+                SQL
+            </div>
+
+            <pre>SELECT * FROM students;</pre>
+
+            <pre>SELECT name, age
+FROM students;</pre>
+
+        </section>
+
+
+        <!-- 11 -->
+        <section class="chapter" id="chapter-11">
+
+            <span class="chapter-number">CHAPTER 11</span>
+
+            <h2>INSERT Statement</h2>
+
+            <p>
+                INSERT ប្រើសម្រាប់បញ្ចូល Record ថ្មី
+                ទៅក្នុង Table។
+            </p>
+
+            <div class="code-title">
+                SQL
+            </div>
+
+            <pre>INSERT INTO students
+(id, name, age)
+VALUES
+(1, 'Dara', 20);</pre>
+
+        </section>
+
+
+        <!-- 12 -->
+        <section class="chapter" id="chapter-12">
+
+            <span class="chapter-number">CHAPTER 12</span>
+
+            <h2>UPDATE Statement</h2>
+
+            <p>
+                UPDATE ប្រើសម្រាប់កែប្រែទិន្នន័យ
+                ដែលមានស្រាប់។
+            </p>
+
+            <div class="code-title">
+                SQL
+            </div>
+
+            <pre>UPDATE students
+SET age = 21
+WHERE id = 1;</pre>
+
+        </section>
+
+
+        <!-- 13 -->
+        <section class="chapter" id="chapter-13">
+
+            <span class="chapter-number">CHAPTER 13</span>
+
+            <h2>DELETE Statement</h2>
+
+            <p>
+                DELETE ប្រើសម្រាប់លុប Record ចេញពី Table។
+            </p>
+
+            <div class="code-title">
+                SQL
+            </div>
+
+            <pre>DELETE FROM students
+WHERE id = 1;</pre>
+
+            <div class="tip-box">
+                ⚠️ ត្រូវប្រើ WHERE ដោយប្រុងប្រយ័ត្ន
+                ពេលប្រើ DELETE។
+            </div>
+
+        </section>
+
+
+        <!-- 14 -->
+        <section class="chapter" id="chapter-14">
+
+            <span class="chapter-number">CHAPTER 14</span>
+
+            <h2>JOIN</h2>
+
+            <p>
+                JOIN ប្រើសម្រាប់ភ្ជាប់ទិន្នន័យពី Table
+                ដែលមានទំនាក់ទំនងគ្នា។
+            </p>
+
+            <div class="code-title">
+                SQL
+            </div>
+
+            <pre>SELECT students.name, orders.id
+FROM students
+JOIN orders
+ON students.id = orders.student_id;</pre>
+
+        </section>
+
+
+        <!-- 15 -->
+        <section class="chapter" id="chapter-15">
+
+            <span class="chapter-number">CHAPTER 15</span>
+
+            <h2>Database Normalization</h2>
+
+            <p>
+                Normalization គឺជាដំណើរការរៀបចំ Database
+                ដើម្បីកាត់បន្ថយ Data Redundancy
+                និងធ្វើឱ្យទិន្នន័យមានរចនាសម្ព័ន្ធល្អ។
+            </p>
+
+            <ul>
+                <li>1NF</li>
+                <li>2NF</li>
+                <li>3NF</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 16 -->
+        <section class="chapter" id="chapter-16">
+
+            <span class="chapter-number">CHAPTER 16</span>
+
+            <h2>ER Diagram</h2>
+
+            <p>
+                ER Diagram (Entity Relationship Diagram)
+                ប្រើសម្រាប់បង្ហាញ Entity និង Relationship
+                នៅក្នុង Database។
+            </p>
+
+            <ul>
+                <li>Entity</li>
+                <li>Attribute</li>
+                <li>Relationship</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 17 -->
+        <section class="chapter" id="chapter-17">
+
+            <span class="chapter-number">CHAPTER 17</span>
+
+            <h2>Database Transactions</h2>
+
+            <p>
+                Transaction គឺជាក្រុមនៃប្រតិបត្តិការដែលត្រូវបាន
+                ប្រតិបត្តិជាឯកតាមួយ។
+            </p>
+
+            <div class="code-title">
+                SQL
+            </div>
+
+            <pre>START TRANSACTION;
+
+UPDATE accounts
+SET balance = balance - 100
+WHERE id = 1;
+
+COMMIT;</pre>
+
+        </section>
+
+
+        <!-- 18 -->
+        <section class="chapter" id="chapter-18">
+
+            <span class="chapter-number">CHAPTER 18</span>
+
+            <h2>Database Security</h2>
+
+            <p>
+                Database Security គឺជាការការពារ Database
+                ពីការចូលប្រើដែលគ្មានការអនុញ្ញាត
+                និងការបាត់បង់ទិន្នន័យ។
+            </p>
+
+            <ul>
+                <li>Authentication</li>
+                <li>Authorization</li>
+                <li>Access Control</li>
+                <li>Encryption</li>
+                <li>Strong Passwords</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 19 -->
+        <section class="chapter" id="chapter-19">
+
+            <span class="chapter-number">CHAPTER 19</span>
+
+            <h2>Backup & Recovery</h2>
+
+            <p>
+                Database Backup គឺជាការរក្សាទុកច្បាប់ចម្លង
+                នៃទិន្នន័យ ដើម្បីអាចយកមកប្រើវិញ
+                នៅពេលមានបញ្ហា។
+            </p>
+
+            <ul>
+                <li>Full Backup</li>
+                <li>Incremental Backup</li>
+                <li>Differential Backup</li>
+                <li>Database Recovery</li>
+            </ul>
+
+        </section>
+
+
+        <!-- 20 -->
+        <section class="chapter" id="chapter-20">
+
+            <span class="chapter-number">CHAPTER 20</span>
+
+            <h2>Database Project</h2>
+
+            <p>
+                បន្ទាប់ពីរៀន Database Systems
+                អ្នកអាចអនុវត្តដោយបង្កើត Project មួយ។
+            </p>
+
+            <ul>
+                <li>👨‍🎓 Student Management System</li>
+                <li>📚 Library Management System</li>
+                <li>🛒 Online Shop Database</li>
+                <li>🏫 School Management System</li>
+                <li>🏥 Hospital Management System</li>
+            </ul>
+
+            <div class="code-title">
+                Example Database
+            </div>
+
+            <pre>CREATE DATABASE school;
+
+USE school;
+
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(100),
+    age INT,
+    email VARCHAR(150)
+);</pre>
+
+            <div class="tip-box">
+                🚀 ការអនុវត្ត Project ពិតប្រាកដ
+                នឹងជួយឱ្យអ្នកយល់ពីរបៀបដែល Database
+                ត្រូវបានប្រើក្នុងកម្មវិធីជាក់ស្តែង។
+            </div>
+
+        </section>
+
+
+        <!-- CONCLUSION -->
+        <div class="conclusion">
+
+            <h2>🎓 សេចក្ដីសន្និដ្ឋាន</h2>
+
+            <p>
+                Database Systems គឺជាមូលដ្ឋានសំខាន់សម្រាប់
+                Web Development, Software Development,
+                Data Management និង IT។
+            </p>
+
+            <p style="margin-top:15px;">
+                🗄️ ចាប់ផ្ដើមពី Tables និង SQL
+                ហើយបន្តទៅ Relationships, Normalization,
+                Security និង Database Projects។
+            </p>
+
+        </div>
+
+
+        <!-- BACK -->
+        <div class="back-section">
+
+            <a href="books.html" class="back-button">
+                ← ត្រឡប់ទៅ Books
+            </a>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- TOP BUTTON -->
+<button class="top-button" id="topButton">
+    ↑
+</button>
+
+
+<script>
+
+    /* Reading Progress */
+
+    window.addEventListener("scroll", function () {
+
+        const scrollTop = window.scrollY;
+
+        const documentHeight =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+
+        const progress =
+            (scrollTop / documentHeight) * 100;
+
+        document.getElementById("progressBar")
+            .style.width = progress + "%";
+
+    });
+
+
+    /* Back To Top */
+
+    const topButton =
+        document.getElementById("topButton");
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 400) {
+            topButton.style.display = "block";
+        } else {
+            topButton.style.display = "none";
+        }
+
+    });
+
+    topButton.addEventListener("click", function () {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    /* Search Chapters */
+
+    const search =
+        document.getElementById("chapterSearch");
+
+    const chapters =
+        document.querySelectorAll(".chapter");
+
+    search.addEventListener("input", function () {
+
+        const value =
+            search.value.toLowerCase();
+
+        chapters.forEach(function (chapter) {
+
+            const text =
+                chapter.textContent.toLowerCase();
+
+            if (text.includes(value)) {
+                chapter.style.display = "block";
+            } else {
+                chapter.style.display = "none";
+            }
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

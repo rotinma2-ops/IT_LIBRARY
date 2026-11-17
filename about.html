@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>About - IT Library</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+
+            height: 85px;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 45px;
+
+            box-shadow:
+                0 2px 10px rgba(0,0,0,0.08);
+        }
+
+
+        .logo {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #2563eb;
+        }
+
+
+        .logo span {
+
+            color: #1e293b;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 35px;
+        }
+
+
+        .nav-links a {
+
+            text-decoration: none;
+
+            color: #334155;
+
+            font-size: 18px;
+
+            transition: 0.3s;
+        }
+
+
+        .nav-links a:hover {
+
+            color: #2563eb;
+        }
+
+
+        .nav-links .active {
+
+            color: #2563eb;
+
+            font-weight: bold;
+        }
+
+
+        .login-btn {
+
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 13px 30px;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .about-hero {
+
+            min-height: 400px;
+
+            padding: 70px 10%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 50px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #ffffff
+                );
+        }
+
+
+        .about-text {
+
+            max-width: 650px;
+        }
+
+
+        .about-text .small-title {
+
+            color: #2563eb;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .about-text h1 {
+
+            font-size: 46px;
+
+            line-height: 1.2;
+
+            margin-bottom: 20px;
+        }
+
+
+        .about-text h1 span {
+
+            color: #2563eb;
+        }
+
+
+        .about-text p {
+
+            color: #64748b;
+
+            font-size: 17px;
+
+            line-height: 1.8;
+        }
+
+
+        .about-icon {
+
+            width: 270px;
+
+            height: 270px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 110px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.10);
+        }
+
+
+        /* ================= ABOUT SECTION ================= */
+
+        .about-section {
+
+            max-width: 1150px;
+
+            margin: auto;
+
+            padding: 70px 25px;
+        }
+
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+
+        .section-title .small-title {
+
+            color: #2563eb;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-title h2 {
+
+            font-size: 32px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .section-title p {
+
+            color: #64748b;
+
+            font-size: 16px;
+        }
+
+
+        /* ================= INFORMATION CARDS ================= */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        .info-card {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.06);
+
+            transition: 0.3s;
+        }
+
+
+        .info-card:hover {
+
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.10);
+        }
+
+
+        .info-icon {
+
+            width: 65px;
+
+            height: 65px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #eff6ff;
+
+            border-radius: 12px;
+
+            font-size: 32px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .info-card h3 {
+
+            font-size: 21px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .info-card p {
+
+            color: #64748b;
+
+            line-height: 1.7;
+
+            font-size: 15px;
+        }
+
+
+        /* ================= MISSION ================= */
+
+        .mission {
+
+            background: white;
+
+            padding: 60px 10%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 60px;
+        }
+
+
+        .mission-icon {
+
+            min-width: 180px;
+
+            height: 180px;
+
+            border-radius: 20px;
+
+            background: #eff6ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 80px;
+        }
+
+
+        .mission-text h2 {
+
+            font-size: 32px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .mission-text p {
+
+            color: #64748b;
+
+            line-height: 1.8;
+
+            font-size: 16px;
+
+            max-width: 750px;
+        }
+
+
+        /* ================= STATISTICS ================= */
+
+        .statistics {
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 50px 10%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            text-align: center;
+        }
+
+
+        .statistics h2 {
+
+            font-size: 35px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .statistics p {
+
+            font-size: 15px;
+
+            opacity: 0.9;
+        }
+
+
+        /* ================= WHY US ================= */
+
+        .why-section {
+
+            max-width: 1150px;
+
+            margin: auto;
+
+            padding: 70px 25px;
+        }
+
+
+        .why-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .why-item {
+
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+            border: 1px solid #e2e8f0;
+
+            display: flex;
+
+            gap: 18px;
+
+            align-items: flex-start;
+        }
+
+
+        .check {
+
+            width: 35px;
+
+            height: 35px;
+
+            min-width: 35px;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+
+        .why-item h3 {
+
+            margin-bottom: 7px;
+
+            font-size: 18px;
+        }
+
+
+        .why-item p {
+
+            color: #64748b;
+
+            line-height: 1.5;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+
+            background: #0f172a;
+
+            color: white;
+
+            padding: 40px 10%;
+
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr 1fr;
+
+            gap: 40px;
+        }
+
+
+        .footer h2 {
+
+            color: white;
+
+            margin-bottom: 12px;
+        }
+
+
+        .footer h3 {
+
+            margin-bottom: 12px;
+        }
+
+
+        .footer p {
+
+            color: #94a3b8;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+
+        .footer a {
+
+            display: block;
+
+            color: #94a3b8;
+
+            text-decoration: none;
+
+            margin-bottom: 8px;
+        }
+
+
+        .footer a:hover {
+
+            color: white;
+        }
+
+
+        .copyright {
+
+            background: #0f172a;
+
+            border-top: 1px solid #334155;
+
+            color: #94a3b8;
+
+            text-align: center;
+
+            padding: 18px;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .about-hero {
+
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .statistics {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 30px;
+            }
+
+
+            .mission {
+
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+
+            .footer {
+
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .navbar {
+
+                padding: 0 20px;
+            }
+
+
+            .nav-links {
+
+                display: none;
+            }
+
+
+            .about-text h1 {
+
+                font-size: 35px;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .why-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .statistics {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .footer {
+
+                grid-template-columns: 1fr;
+            }
+        }
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            white-space: nowrap;
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav class="navbar">
+
+
+        <div class="logo">
+
+            📚 IT <span>Library</span>
+
+        </div>
+
+
+        <div class="nav-links">
+
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="books.html">
+                Books
+            </a>
+
+
+            <a href="categories.html">
+                Categories
+            </a>
+
+
+            <a href="about.html"
+               class="active">
+
+                About
+
+            </a>
+
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="login.html" class="login-btn"><span  style="color: white;"><b>Login</b></span></a>
+
+
+        </div>
+
+
+
+    </nav>
+
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="about-hero">
+
+
+        <div class="about-text">
+
+
+            <p class="small-title">
+
+                ABOUT IT LIBRARY
+
+            </p>
+
+
+            <h1>
+
+                Learn, Explore &
+                <span>Grow with IT</span>
+
+            </h1>
+
+
+            <p>
+
+                IT Library is a digital book library
+                designed for Information Technology
+                students and learners. Our goal is to
+                provide useful learning resources in
+                one simple and organized place.
+
+            </p>
+
+
+        </div>
+
+
+        <div class="about-icon">
+
+            📚
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= ABOUT US ================= -->
+
+    <section class="about-section">
+
+
+        <div class="section-title">
+
+
+            <p class="small-title">
+
+                WHO WE ARE
+
+            </p>
+
+
+            <h2>
+
+                About Our Library
+
+            </h2>
+
+
+            <p>
+
+                A simple digital library for
+                Information Technology learning.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="info-grid">
+
+
+            <!-- Card 1 -->
+
+            <div class="info-card">
+
+
+                <div class="info-icon">
+
+                    📚
+
+                </div>
+
+
+                <h3>
+
+                    Our Library
+
+                </h3>
+
+
+                <p>
+
+                    We provide a collection of
+                    Information Technology books
+                    covering different IT subjects
+                    and learning levels.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- Card 2 -->
+
+            <div class="info-card">
+
+
+                <div class="info-icon">
+
+                    🎓
+
+                </div>
+
+
+                <h3>
+
+                    For Students
+
+                </h3>
+
+
+                <p>
+
+                    Our website helps students
+                    easily discover learning
+                    resources for their studies
+                    and IT projects.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- Card 3 -->
+
+            <div class="info-card">
+
+
+                <div class="info-icon">
+
+                    💡
+
+                </div>
+
+
+                <h3>
+
+                    Easy Learning
+
+                </h3>
+
+
+                <p>
+
+                    Books are organized into
+                    categories so users can quickly
+                    find topics they are interested in.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= MISSION ================= -->
+
+    <section class="mission">
+
+
+        <div class="mission-icon">
+
+            🎯
+
+        </div>
+
+
+        <div class="mission-text">
+
+
+            <h2>
+
+                Our Mission
+
+            </h2>
+
+
+            <p>
+
+                Our mission is to make Information
+                Technology learning resources easier
+                to discover and access. We want to
+                create a simple digital library where
+                students can explore programming,
+                networking, databases, cybersecurity,
+                web development and other IT subjects.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= STATISTICS ================= -->
+
+    <section class="statistics">
+
+
+        <div>
+
+            <h2>500+</h2>
+
+            <p>IT Books</p>
+
+        </div>
+
+
+        <div>
+
+            <h2>120+</h2>
+
+            <p>Authors</p>
+
+        </div>
+
+
+        <div>
+
+            <h2>10+</h2>
+
+            <p>Categories</p>
+
+        </div>
+
+
+        <div>
+
+            <h2>1,000+</h2>
+
+            <p>Students</p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= WHY IT LIBRARY ================= -->
+
+    <section class="why-section">
+
+
+        <div class="section-title">
+
+
+            <p class="small-title">
+
+                OUR FEATURES
+
+            </p>
+
+
+            <h2>
+
+                Why Use IT Library?
+
+            </h2>
+
+
+            <p>
+
+                Designed to make IT learning
+                easier and more organized.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="why-grid">
+
+
+            <div class="why-item">
+
+                <div class="check">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Easy to Find Books
+                    </h3>
+
+                    <p>
+                        Search and explore books
+                        by category and topic.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="why-item">
+
+                <div class="check">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Many IT Subjects
+                    </h3>
+
+                    <p>
+                        Explore programming,
+                        networking, database,
+                        security and more.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="why-item">
+
+                <div class="check">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Student Friendly
+                    </h3>
+
+                    <p>
+                        Simple design that is
+                        easy for students to use.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="why-item">
+
+                <div class="check">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Organized Categories
+                    </h3>
+
+                    <p>
+                        Books are grouped into
+                        clear IT categories.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+
+        <div>
+
+            <h2>
+                📚 IT Library
+            </h2>
+
+            <p>
+                Your digital library for
+                Information Technology
+                learning resources.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="books.html">
+                Books
+            </a>
+
+            <a href="categories.html">
+                Categories
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                📧 itlibrary@example.com
+            </p>
+
+            <p>
+                📍 Cambodia
+            </p>
+
+        </div>
+
+
+    </footer>
+
+
+    <div class="copyright">
+
+        © 2026 IT Library.
+        All Rights Reserved.
+
+    </div>
+
+
+</body>
+
+</html>

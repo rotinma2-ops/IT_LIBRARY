@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Categories - IT Library</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+
+            height: 85px;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 45px;
+
+            box-shadow:
+                0 2px 10px rgba(0,0,0,0.08);
+        }
+
+
+        .logo {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #2563eb;
+        }
+
+
+        .logo span {
+
+            color: #1e293b;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 35px;
+        }
+
+
+        .nav-links a {
+
+            text-decoration: none;
+
+            color: #334155;
+
+            font-size: 18px;
+
+            transition: 0.3s;
+        }
+
+
+        .nav-links a:hover {
+
+            color: #2563eb;
+        }
+
+
+        .nav-links .active {
+
+            color: #2563eb;
+
+            font-weight: bold;
+        }
+
+
+        .login-btn {
+
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 13px 30px;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        .category-header {
+
+            text-align: center;
+
+            padding: 70px 20px 50px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #ffffff
+                );
+        }
+
+
+        .category-header p {
+
+            color: #2563eb;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .category-header h1 {
+
+            font-size: 45px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .category-header span {
+
+            color: #64748b;
+
+            font-size: 17px;
+        }
+
+
+        /* ================= CATEGORY CONTAINER ================= */
+
+        .categories-container {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 50px 25px 70px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        /* ================= CATEGORY CARD ================= */
+
+        .category-card {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 16px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.07);
+
+            transition: 0.3s;
+
+            text-align: center;
+        }
+
+
+        .category-card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.12);
+        }
+
+
+        /* ================= ICON ================= */
+
+        .category-icon {
+
+            width: 85px;
+
+            height: 85px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #eff6ff;
+
+            border-radius: 50%;
+
+            font-size: 40px;
+        }
+
+
+        /* ================= TEXT ================= */
+
+        .category-card h2 {
+
+            font-size: 22px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .category-card p {
+
+            color: #64748b;
+
+            line-height: 1.6;
+
+            font-size: 15px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* ================= VIEW BUTTON ================= */
+
+        .view-btn {
+
+            display: inline-block;
+
+            padding: 11px 22px;
+
+            background: #2563eb;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        .view-btn:hover {
+
+            background: #1d4ed8;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+
+            background: #0f172a;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+
+            margin-top: 20px;
+        }
+
+
+        .footer p {
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            margin-top: 8px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .categories-container {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .nav-links {
+
+                gap: 15px;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .navbar {
+
+                padding: 0 20px;
+            }
+
+            .nav-links {
+
+                display: none;
+            }
+
+            .categories-container {
+
+                grid-template-columns: 1fr;
+            }
+
+            .category-header h1 {
+
+                font-size: 35px;
+            }
+        }
+         .nav-links {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            white-space: nowrap;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav class="navbar">
+
+
+        <div class="logo">
+
+            📚 IT <span>Library</span>
+
+        </div>
+
+
+        <div class="nav-links">
+
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="books.html">
+                Books
+            </a>
+
+
+            <a href="categories.html"
+               class="active">
+
+                Categories
+
+            </a>
+
+
+            <a href="about.html">
+                About
+            </a>
+
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="login.html" class="login-btn"><span  style="color: white;"><b>Login</b></span></a>
+
+
+        </div>
+
+        
+        </button>
+
+
+    </nav>
+
+
+
+    <!-- ================= HEADER ================= -->
+
+    <section class="category-header">
+
+
+        <p>
+            📚 IT BOOK CATEGORIES
+        </p>
+
+
+        <h1>
+            Explore Categories
+        </h1>
+
+
+        <span>
+            Find books based on your Information
+            Technology interests.
+        </span>
+
+
+    </section>
+
+
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <section class="categories-container">
+
+
+        <!-- Programming -->
+
+        <div class="category-card">
+
+
+            <div class="category-icon">
+                💻
+            </div>
+
+
+            <h2>
+                Programming
+            </h2>
+
+
+            <p>
+                Learn programming languages,
+                algorithms, data structures
+                and software development.
+            </p>
+
+
+            <a href="books.html"
+               class="view-btn">
+
+                View Books
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- Networking -->
+
+        <div class="category-card">
+
+
+            <div class="category-icon">
+                🌐
+            </div>
+
+
+            <h2>
+                Networking
+            </h2>
+
+
+            <p>
+                Explore computer networks,
+                TCP/IP, routers, switches,
+                protocols and network security.
+            </p>
+
+
+            <a href="books.html"
+               class="view-btn">
+
+                View Books
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- Database -->
+
+        <div class="category-card">
+
+
+            <div class="category-icon">
+                🗄️
+            </div>
+
+
+            <h2>
+                Database
+            </h2>
+
+
+            <p>
+                Learn SQL, database design,
+                tables, relationships and
+                database management systems.
+            </p>
+
+
+            <a href="books.html"
+               class="view-btn">
+
+                View Books
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- Cybersecurity -->
+
+        <div class="category-card">
+
+
+            <div class="category-icon">
+                🔐
+            </div>
+
+
+            <h2>
+                Cybersecurity
+            </h2>
+
+
+            <p>
+                Understand cybersecurity,
+                threats, data protection
+                and information security.
+            </p>
+
+
+            <a href="books.html"
+               class="view-btn">
+
+                View Books
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- Web Development -->
+
+        <div class="category-card">
+
+
+            <div class="category-icon">
+                🌍
+            </div>
+
+
+            <h2>
+                Web Development
+            </h2>
+
+
+            <p>
+                Learn HTML, CSS, JavaScript,
+                Django and modern web
+                development technologies.
+            </p>
+
+
+            <a href="books.html"
+               class="view-btn">
+
+                View Books
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- Artificial Intelligence -->
+
+        <div class="category-card">
+
+
+            <div class="category-icon">
+                🤖
+            </div>
+
+
+            <h2>
+                Artificial Intelligence
+            </h2>
+
+
+            <p>
+                Explore AI, machine learning,
+                neural networks and
+                intelligent systems.
+            </p>
+
+
+            <a href="books.html"
+               class="view-btn">
+
+                View Books
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- Software Engineering -->
+
+        <div class="category-card">
+
+
+            <div class="category-icon">
+                ⚙️
+            </div>
+
+
+            <h2>
+                Software Engineering
+            </h2>
+
+
+            <p>
+                Learn software development,
+                testing, system design
+                and project management.
+            </p>
+
+
+            <a href="books.html"
+               class="view-btn">
+
+                View Books
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- Operating Systems -->
+
+        <div class="category-card">
+
+
+            <div class="category-icon">
+                🖥️
+            </div>
+
+
+            <h2>
+                Operating Systems
+            </h2>
+
+
+            <p>
+                Study Windows, Linux,
+                processes, memory and
+                computer system management.
+            </p>
+
+
+            <a href="books.html"
+               class="view-btn">
+
+                View Books
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- IT Fundamentals -->
+
+        <div class="category-card">
+
+
+            <div class="category-icon">
+                📘
+            </div>
+
+
+            <h2>
+                IT Fundamentals
+            </h2>
+
+
+            <p>
+                Learn basic computer concepts,
+                hardware, software and
+                Information Technology.
+            </p>
+
+
+            <a href="books.html"
+               class="view-btn">
+
+                View Books
+
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <h3>
+            📚 IT Library
+        </h3>
+
+        <p>
+            Information Technology Book Library
+        </p>
+
+        <p>
+            © 2026 IT Library. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

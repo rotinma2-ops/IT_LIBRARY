@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Artificial Intelligence | AI Research</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, "Khmer OS Battambang",
+                         "Noto Sans Khmer", sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.8;
+        }
+
+        /* Reading Progress */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 0%;
+            background: linear-gradient(
+                90deg,
+                #7c3aed,
+                #2563eb,
+                #06b6d4
+            );
+            z-index: 9999;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #111827,
+                #4c1d95,
+                #2563eb
+            );
+            color: white;
+            padding: 70px 20px 100px;
+        }
+
+        .hero-content {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 30px;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.25);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #c4b5fd;
+        }
+
+        .hero p {
+            max-width: 800px;
+            color: #e0e7ff;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .author {
+            color: #c7d2fe;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 12px 23px;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        .btn-main {
+            background: white;
+            color: #4c1d95;
+        }
+
+        .btn-back {
+            color: white;
+            background: rgba(255,255,255,.1);
+            border: 1px solid rgba(255,255,255,.3);
+        }
+
+        /* Stats */
+        .stats {
+            max-width: 1150px;
+            margin: -45px auto 40px;
+            padding: 0 20px;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .stat {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            text-align: center;
+
+            box-shadow: 0 7px 25px rgba(0,0,0,.08);
+        }
+
+        .stat-icon {
+            font-size: 28px;
+        }
+
+        .stat-number {
+            color: #6d28d9;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* Main Layout */
+        .layout {
+            max-width: 1150px;
+            margin: auto;
+            padding: 0 20px 60px;
+
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+
+            box-shadow: 0 5px 25px rgba(0,0,0,.07);
+        }
+
+        .sidebar h3 {
+            margin-bottom: 15px;
+        }
+
+        .search {
+            width: 100%;
+            padding: 10px;
+
+            border: 1px solid #dbe3ee;
+            border-radius: 8px;
+            outline: none;
+
+            margin-bottom: 15px;
+        }
+
+        .search:focus {
+            border-color: #7c3aed;
+        }
+
+        .chapters {
+            list-style: none;
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        .chapters a {
+            display: block;
+
+            text-decoration: none;
+            color: #475569;
+
+            font-size: 13px;
+            padding: 7px 9px;
+
+            border-radius: 7px;
+        }
+
+        .chapters a:hover {
+            color: #6d28d9;
+            background: #f5f3ff;
+        }
+
+        /* Content */
+        .intro,
+        .chapter {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 24px;
+
+            box-shadow: 0 5px 25px rgba(0,0,0,.06);
+        }
+
+        .intro h2 {
+            color: #4c1d95;
+            margin-bottom: 12px;
+        }
+
+        .intro p,
+        .chapter p {
+            color: #475569;
+        }
+
+        .chapter {
+            scroll-margin-top: 20px;
+        }
+
+        .number {
+            display: inline-block;
+
+            color: #6d28d9;
+            background: #f5f3ff;
+
+            padding: 4px 12px;
+            border-radius: 30px;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .chapter h2 {
+            color: #312e81;
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .chapter ul {
+            padding-left: 25px;
+            color: #475569;
+        }
+
+        .chapter li {
+            margin-bottom: 5px;
+        }
+
+        /* Information boxes */
+        .info {
+            background: #eef2ff;
+            border-left: 4px solid #6366f1;
+
+            padding: 15px;
+            margin-top: 18px;
+
+            border-radius: 7px;
+        }
+
+        .tip {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+
+            padding: 15px;
+            margin-top: 18px;
+
+            border-radius: 7px;
+        }
+
+        /* Code */
+        .code-title {
+            margin-top: 18px;
+
+            background: #111827;
+            color: #94a3b8;
+
+            padding: 7px 14px;
+
+            border-radius: 8px 8px 0 0;
+
+            font-size: 12px;
+        }
+
+        pre {
+            background: #020617;
+            color: #e2e8f0;
+
+            padding: 18px;
+
+            overflow-x: auto;
+
+            border-radius: 0 0 8px 8px;
+
+            font-family: Consolas, monospace;
+        }
+
+        code {
+            background: #f5f3ff;
+            color: #6d28d9;
+
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        /* Conclusion */
+        .conclusion {
+            background: linear-gradient(
+                135deg,
+                #111827,
+                #4c1d95,
+                #2563eb
+            );
+
+            color: white;
+
+            padding: 35px;
+            border-radius: 16px;
+        }
+
+        .conclusion h2 {
+            margin-bottom: 12px;
+        }
+
+        .conclusion p {
+            color: #e0e7ff;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back a {
+            display: inline-block;
+
+            padding: 12px 25px;
+
+            background: #6d28d9;
+            color: white;
+
+            text-decoration: none;
+            border-radius: 9px;
+        }
+
+        /* Top Button */
+        #top {
+            display: none;
+
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+
+            width: 45px;
+            height: 45px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: #6d28d9;
+            color: white;
+
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        @media(max-width: 900px) {
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .chapter,
+            .intro {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div id="progress"></div>
+
+
+<!-- HERO -->
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🤖 ARTIFICIAL INTELLIGENCE COURSE
+        </div>
+
+        <h1>
+            Artificial <span>Intelligence</span>
+        </h1>
+
+        <p>
+            សិក្សាអំពី Artificial Intelligence,
+            Machine Learning, Neural Networks,
+            Deep Learning និង Intelligent Systems។
+        </p>
+
+        <div class="author">
+            🤖 Author: AI Research
+        </div>
+
+        <div class="buttons">
+
+            <a href="#chapter-1" class="btn btn-main">
+                🚀 Start Learning
+            </a>
+
+            <a href="books.html" class="btn btn-back">
+                ← Back to Books
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- STATS -->
+<div class="stats">
+
+    <div class="stat">
+        <div class="stat-icon">📚</div>
+        <div class="stat-number">20</div>
+        <div class="stat-label">Chapters</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">🧠</div>
+        <div class="stat-number">AI</div>
+        <div class="stat-label">Intelligence</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">📊</div>
+        <div class="stat-number">ML</div>
+        <div class="stat-label">Machine Learning</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-icon">🤖</div>
+        <div class="stat-number">DL</div>
+        <div class="stat-label">Deep Learning</div>
+    </div>
+
+</div>
+
+
+<div class="layout">
+
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <h3>📑 Chapters</h3>
+
+        <input
+            type="text"
+            id="search"
+            class="search"
+            placeholder="🔍 Search chapter..."
+        >
+
+        <ul class="chapters">
+
+            <li><a href="#chapter-1">01. Introduction to AI</a></li>
+            <li><a href="#chapter-2">02. History of AI</a></li>
+            <li><a href="#chapter-3">03. AI Applications</a></li>
+            <li><a href="#chapter-4">04. Intelligent Agents</a></li>
+            <li><a href="#chapter-5">05. Problem Solving</a></li>
+            <li><a href="#chapter-6">06. Machine Learning</a></li>
+            <li><a href="#chapter-7">07. Supervised Learning</a></li>
+            <li><a href="#chapter-8">08. Unsupervised Learning</a></li>
+            <li><a href="#chapter-9">09. Reinforcement Learning</a></li>
+            <li><a href="#chapter-10">10. Data</a></li>
+            <li><a href="#chapter-11">11. Neural Networks</a></li>
+            <li><a href="#chapter-12">12. Deep Learning</a></li>
+            <li><a href="#chapter-13">13. Computer Vision</a></li>
+            <li><a href="#chapter-14">14. Natural Language Processing</a></li>
+            <li><a href="#chapter-15">15. Generative AI</a></li>
+            <li><a href="#chapter-16">16. AI and Robotics</a></li>
+            <li><a href="#chapter-17">17. AI Ethics</a></li>
+            <li><a href="#chapter-18">18. AI Security</a></li>
+            <li><a href="#chapter-19">19. Future of AI</a></li>
+            <li><a href="#chapter-20">20. AI Project</a></li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- CONTENT -->
+    <main>
+
+
+        <!-- INTRO -->
+        <div class="intro">
+
+            <h2>🤖 ស្វាគមន៍មកកាន់ Artificial Intelligence</h2>
+
+            <p>
+                Artificial Intelligence (AI) គឺជាវិស័យមួយ
+                នៃវិទ្យាសាស្ត្រកុំព្យូទ័រ ដែលផ្តោតលើការបង្កើត
+                ប្រព័ន្ធដែលអាចអនុវត្តភារកិច្ចដែលជាទូទៅ
+                ត្រូវការសមត្ថភាពដូចជាការយល់ដឹង
+                ការរៀន និងការសម្រេចចិត្ត។
+            </p>
+
+            <div class="info">
+                💡 <strong>គោលបំណង៖</strong>
+                ស្វែងយល់ពី AI ចាប់ពីគោលគំនិតមូលដ្ឋាន
+                រហូតដល់ Machine Learning, Deep Learning
+                និង Generative AI។
+            </div>
+
+        </div>
+
+
+        <!-- CHAPTER 1 -->
+        <section class="chapter" id="chapter-1">
+
+            <span class="number">CHAPTER 01</span>
+
+            <h2>សេចក្ដីផ្ដើមអំពី Artificial Intelligence</h2>
+
+            <p>
+                Artificial Intelligence គឺជាបច្ចេកវិទ្យា
+                ដែលអនុញ្ញាតឱ្យ Computer Systems
+                អាចធ្វើកិច្ចការដែលត្រូវការការគិត
+                ឬការសម្រេចចិត្ត។
+            </p>
+
+            <ul>
+                <li>ការរៀនពីទិន្នន័យ</li>
+                <li>ការស្គាល់ Pattern</li>
+                <li>ការយល់ភាសា</li>
+                <li>ការសម្រេចចិត្ត</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 2 -->
+        <section class="chapter" id="chapter-2">
+
+            <span class="number">CHAPTER 02</span>
+
+            <h2>ប្រវត្តិរបស់ AI</h2>
+
+            <p>
+                AI បានអភិវឌ្ឍជាបន្តបន្ទាប់តាមរយៈ
+                ការស្រាវជ្រាវផ្នែក Computer Science,
+                Mathematics និង Statistics។
+            </p>
+
+            <div class="info">
+                🧠 AI សព្វថ្ងៃមានការរីកចម្រើនយ៉ាងខ្លាំង
+                ដោយសារមានទិន្នន័យ និង Computing Power
+                កាន់តែច្រើន។
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 3 -->
+        <section class="chapter" id="chapter-3">
+
+            <span class="number">CHAPTER 03</span>
+
+            <h2>ការប្រើប្រាស់ AI</h2>
+
+            <p>
+                AI ត្រូវបានប្រើប្រាស់នៅក្នុងវិស័យជាច្រើន។
+            </p>
+
+            <ul>
+                <li>🏥 Healthcare</li>
+                <li>🏦 Finance</li>
+                <li>🚗 Transportation</li>
+                <li>🎓 Education</li>
+                <li>🛒 E-Commerce</li>
+                <li>🤖 Robotics</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 4 -->
+        <section class="chapter" id="chapter-4">
+
+            <span class="number">CHAPTER 04</span>
+
+            <h2>Intelligent Agents</h2>
+
+            <p>
+                Intelligent Agent គឺជាប្រព័ន្ធដែលអាច
+                ទទួលព័ត៌មានពីបរិស្ថាន ហើយធ្វើសកម្មភាព
+                ដើម្បីសម្រេចគោលដៅ។
+            </p>
+
+            <ul>
+                <li>Environment</li>
+                <li>Sensors</li>
+                <li>Decision Making</li>
+                <li>Actions</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 5 -->
+        <section class="chapter" id="chapter-5">
+
+            <span class="number">CHAPTER 05</span>
+
+            <h2>ការដោះស្រាយបញ្ហា</h2>
+
+            <p>
+                AI អាចប្រើ Algorithms ដើម្បីស្វែងរក
+                Solution សម្រាប់បញ្ហាមួយ។
+            </p>
+
+            <ul>
+                <li>Search Algorithms</li>
+                <li>State Space</li>
+                <li>Goal State</li>
+                <li>Optimization</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 6 -->
+        <section class="chapter" id="chapter-6">
+
+            <span class="number">CHAPTER 06</span>
+
+            <h2>Machine Learning</h2>
+
+            <p>
+                Machine Learning គឺជាផ្នែកមួយនៃ AI
+                ដែលអនុញ្ញាតឱ្យ Computer រៀនពី Data
+                ដោយមិនចាំបាច់សរសេរ Rule សម្រាប់គ្រប់ករណី។
+            </p>
+
+            <div class="info">
+                📊 Data → Training → Model → Prediction
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 7 -->
+        <section class="chapter" id="chapter-7">
+
+            <span class="number">CHAPTER 07</span>
+
+            <h2>Supervised Learning</h2>
+
+            <p>
+                Supervised Learning ប្រើ Data
+                ដែលមាន Label ដើម្បីបង្រៀន Model។
+            </p>
+
+            <ul>
+                <li>Classification</li>
+                <li>Regression</li>
+                <li>Training Data</li>
+                <li>Testing Data</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 8 -->
+        <section class="chapter" id="chapter-8">
+
+            <span class="number">CHAPTER 08</span>
+
+            <h2>Unsupervised Learning</h2>
+
+            <p>
+                Unsupervised Learning ប្រើ Data
+                ដែលមិនមាន Label ដើម្បីស្វែងរក Pattern
+                ឬ Group នៅក្នុង Data។
+            </p>
+
+            <ul>
+                <li>Clustering</li>
+                <li>Pattern Detection</li>
+                <li>Data Grouping</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 9 -->
+        <section class="chapter" id="chapter-9">
+
+            <span class="number">CHAPTER 09</span>
+
+            <h2>Reinforcement Learning</h2>
+
+            <p>
+                Reinforcement Learning គឺជាវិធីសាស្ត្រ
+                ដែល Agent រៀនតាមរយៈការទទួល Reward
+                ឬ Penalty ពីសកម្មភាពរបស់ខ្លួន។
+            </p>
+
+            <div class="info">
+                🎮 Action → Reward/Penalty → Learning
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 10 -->
+        <section class="chapter" id="chapter-10">
+
+            <span class="number">CHAPTER 10</span>
+
+            <h2>ទិន្នន័យក្នុង AI</h2>
+
+            <p>
+                Data គឺជាផ្នែកសំខាន់សម្រាប់ Machine Learning
+                ព្រោះ Model ត្រូវការទិន្នន័យសម្រាប់ Training។
+            </p>
+
+            <ul>
+                <li>Data Collection</li>
+                <li>Data Cleaning</li>
+                <li>Data Preparation</li>
+                <li>Data Analysis</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 11 -->
+        <section class="chapter" id="chapter-11">
+
+            <span class="number">CHAPTER 11</span>
+
+            <h2>Neural Networks</h2>
+
+            <p>
+                Neural Network គឺជា Model ដែលមាន
+                Layers និង Nodes ដែលត្រូវបានប្រើ
+                ដើម្បីរៀន Pattern ពី Data។
+            </p>
+
+            <div class="code-title">Concept</div>
+
+<pre>
+Input Layer
+     ↓
+Hidden Layers
+     ↓
+Output Layer
+</pre>
+
+        </section>
+
+
+        <!-- CHAPTER 12 -->
+        <section class="chapter" id="chapter-12">
+
+            <span class="number">CHAPTER 12</span>
+
+            <h2>Deep Learning</h2>
+
+            <p>
+                Deep Learning ប្រើ Neural Networks
+                ដែលមាន Layers ច្រើន ដើម្បីរៀន
+                Pattern ស្មុគស្មាញពី Data។
+            </p>
+
+            <ul>
+                <li>Deep Neural Networks</li>
+                <li>CNN</li>
+                <li>RNN</li>
+                <li>Transformers</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 13 -->
+        <section class="chapter" id="chapter-13">
+
+            <span class="number">CHAPTER 13</span>
+
+            <h2>Computer Vision</h2>
+
+            <p>
+                Computer Vision គឺជាវិស័យ AI
+                ដែលផ្តោតលើការឱ្យ Computer
+                អាចវិភាគ និងយល់ពី Images ឬ Videos។
+            </p>
+
+            <ul>
+                <li>Image Classification</li>
+                <li>Object Detection</li>
+                <li>Face Recognition</li>
+                <li>Image Processing</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 14 -->
+        <section class="chapter" id="chapter-14">
+
+            <span class="number">CHAPTER 14</span>
+
+            <h2>Natural Language Processing</h2>
+
+            <p>
+                NLP គឺជាវិស័យដែលផ្តោតលើការឱ្យ
+                Computer អាចដំណើរការ និងយល់
+                ភាសាមនុស្ស។
+            </p>
+
+            <ul>
+                <li>Text Analysis</li>
+                <li>Translation</li>
+                <li>Chatbots</li>
+                <li>Speech Processing</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 15 -->
+        <section class="chapter" id="chapter-15">
+
+            <span class="number">CHAPTER 15</span>
+
+            <h2>Generative AI</h2>
+
+            <p>
+                Generative AI គឺជាបច្ចេកវិទ្យា
+                ដែលអាចបង្កើត Content ថ្មី
+                ដូចជា Text, Images, Audio និង Code
+                ពី Input ដែលអ្នកផ្តល់។
+            </p>
+
+            <div class="info">
+                ✨ ឧទាហរណ៍៖ Text Generation,
+                Image Generation និង Code Generation។
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 16 -->
+        <section class="chapter" id="chapter-16">
+
+            <span class="number">CHAPTER 16</span>
+
+            <h2>AI និង Robotics</h2>
+
+            <p>
+                AI អាចត្រូវបានប្រើជាមួយ Robotics
+                ដើម្បីឱ្យ Robot អាចស្គាល់បរិស្ថាន
+                និងធ្វើសកម្មភាពតាមការកំណត់។
+            </p>
+
+            <ul>
+                <li>Robot Vision</li>
+                <li>Navigation</li>
+                <li>Motion Planning</li>
+                <li>Autonomous Systems</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 17 -->
+        <section class="chapter" id="chapter-17">
+
+            <span class="number">CHAPTER 17</span>
+
+            <h2>AI Ethics</h2>
+
+            <p>
+                AI Ethics ផ្តោតលើការប្រើប្រាស់ AI
+                ប្រកបដោយការទទួលខុសត្រូវ និងការគោរព
+                សិទ្ធិរបស់មនុស្ស។
+            </p>
+
+            <ul>
+                <li>Privacy</li>
+                <li>Fairness</li>
+                <li>Transparency</li>
+                <li>Accountability</li>
+            </ul>
+
+            <div class="tip">
+                ⚖️ AI គួរត្រូវបានបង្កើត និងប្រើប្រាស់
+                ដោយមានការទទួលខុសត្រូវ។
+            </div>
+
+        </section>
+
+
+        <!-- CHAPTER 18 -->
+        <section class="chapter" id="chapter-18">
+
+            <span class="number">CHAPTER 18</span>
+
+            <h2>AI Security</h2>
+
+            <p>
+                AI Security គឺជាការការពារ AI Systems
+                និងទិន្នន័យរបស់វាពីការប្រើប្រាស់
+                ឬការវាយប្រហារដែលមិនមានការអនុញ្ញាត។
+            </p>
+
+            <ul>
+                <li>Data Protection</li>
+                <li>Access Control</li>
+                <li>Model Security</li>
+                <li>Privacy Protection</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 19 -->
+        <section class="chapter" id="chapter-19">
+
+            <span class="number">CHAPTER 19</span>
+
+            <h2>អនាគតរបស់ AI</h2>
+
+            <p>
+                AI កំពុងត្រូវបានអភិវឌ្ឍក្នុងវិស័យជាច្រើន
+                ហើយការស្រាវជ្រាវបន្តផ្តោតលើ
+                សមត្ថភាព ការអនុវត្ត និងសុវត្ថិភាពរបស់ AI។
+            </p>
+
+            <ul>
+                <li>Intelligent Assistants</li>
+                <li>Autonomous Systems</li>
+                <li>Advanced Robotics</li>
+                <li>AI Research</li>
+            </ul>
+
+        </section>
+
+
+        <!-- CHAPTER 20 -->
+        <section class="chapter" id="chapter-20">
+
+            <span class="number">CHAPTER 20</span>
+
+            <h2>AI Project</h2>
+
+            <p>
+                បន្ទាប់ពីរៀនមូលដ្ឋាន AI
+                អ្នកអាចចាប់ផ្ដើម Project តូចៗ
+                ដើម្បីអនុវត្តចំណេះដឹង។
+            </p>
+
+            <ul>
+                <li>🤖 Simple Chatbot</li>
+                <li>🖼️ Image Classifier</li>
+                <li>📊 Prediction System</li>
+                <li>💬 Text Classifier</li>
+                <li>🎮 AI Game</li>
+            </ul>
+
+            <div class="tip">
+                🚀 ការធ្វើ Project ជួយឱ្យអ្នកយល់ពី
+                AI និង Machine Learning បានកាន់តែច្បាស់។
+            </div>
+
+        </section>
+
+
+        <!-- CONCLUSION -->
+        <div class="conclusion">
+
+            <h2>🎓 សេចក្ដីសន្និដ្ឋាន</h2>
+
+            <p>
+                Artificial Intelligence គឺជាវិស័យទូលំទូលាយ
+                ដែលរួមមាន Machine Learning,
+                Neural Networks, Deep Learning,
+                Computer Vision, NLP និង Generative AI។
+            </p>
+
+            <p style="margin-top:12px;">
+                🤖 ចាប់ផ្ដើមពី AI Basics
+                → Machine Learning
+                → Deep Learning
+                → AI Projects
+                ហើយបន្តអភិវឌ្ឍជំនាញរបស់អ្នក។
+            </p>
+
+        </div>
+
+
+        <!-- BACK -->
+        <div class="back">
+
+            <a href="books.html">
+                ← ត្រឡប់ទៅ Books
+            </a>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- TOP BUTTON -->
+<button id="top">↑</button>
+
+
+<script>
+
+    // Reading progress
+    window.addEventListener("scroll", function () {
+
+        const scrollTop = window.scrollY;
+
+        const height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+
+        const percent =
+            (scrollTop / height) * 100;
+
+        document.getElementById("progress")
+            .style.width = percent + "%";
+    });
+
+
+    // Back to top
+    const topButton =
+        document.getElementById("top");
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 400) {
+            topButton.style.display = "block";
+        } else {
+            topButton.style.display = "none";
+        }
+
+    });
+
+    topButton.addEventListener("click", function () {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    // Search chapters
+    const search =
+        document.getElementById("search");
+
+    const chapters =
+        document.querySelectorAll(".chapter");
+
+    search.addEventListener("input", function () {
+
+        const value =
+            search.value.toLowerCase();
+
+        chapters.forEach(function (chapter) {
+
+            if (
+                chapter.textContent
+                .toLowerCase()
+                .includes(value)
+            ) {
+                chapter.style.display = "block";
+            } else {
+                chapter.style.display = "none";
+            }
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
